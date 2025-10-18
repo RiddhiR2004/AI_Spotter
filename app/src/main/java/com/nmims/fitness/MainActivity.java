@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         // ✅ Run network operations on a background thread
         new Thread(() -> {
             try {
-                insertSurveyData("John Doe", "john@example.com", 28, 180, 75);
+                insertSurveyData("Riddhi Ranjan", "riddhi@example.com", 21, 163, 53);
             } catch (IOException | JSONException e) {
                 Log.e(TAG, "❌ Error while preparing or sending data", e);
             }

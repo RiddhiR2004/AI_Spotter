@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">FITNESS</string>
+    <string name="hero_image_description" />
+    <string name="icon_chart_description" />
+    <string name="icon_bot_description" />
 </resources>
