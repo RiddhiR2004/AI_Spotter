@@ -8,4 +8,9 @@
     <color name="button_gradient_start">#A07EFD</color>
     <color name="button_gradient_end">#EC407A</color>
     <color name="card_background">#332B4C</color>
+    <color name="accent_purple">#7F52FF</color>
+    <color name="button_gradient_purple">#7F52FF</color>
+    <color name="red_negative">#FF5252</color>
+    <color name="green_positive">#69F0AE</color>
+    <color name="accent_blue">#68A7EA</color>
 </resources>
