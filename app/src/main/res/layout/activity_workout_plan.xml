@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/deep_purple_bg"
+    android:padding="24dp"
+    tools:context=".WorkoutPlanActivity">
+
+    <!-- Header Section -->
+    <ImageView
+        android:id="@+id/imageView_back"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@android:color/white" />
+
+    <TextView
+        android:id="@+id/textView_workoutTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Full Body Strength - Day 1"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView_back"
+        app:layout_constraintTop_toTopOf="@+id/imageView_back" />
+
+
+    <!-- Bottom Controls (Timer and Buttons) -->
+    <LinearLayout
+        android:id="@+id/layout_bottom_controls"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Timer Display -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/TimerTextView"
+                android:text="00" />
+
+            <TextView style="@style/TimerColonTextView" />
+
+            <TextView
+                style="@style/TimerTextView"
+                android:text="00" />
+
+            <TextView style="@style/TimerColonTextView" />
+
+            <TextView
+                style="@style/TimerTextView"
+                android:text="00" />
+        </LinearLayout>
+
+        <!-- Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_start"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="2"
+                android:background="@drawable/button_start_background"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Start"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/button_reset"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_reset_background"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Reset"
+                android:textAllCaps="false"
+                android:textColor="@color/text_light_grey"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <!-- Scrollable Exercise List -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/layout_bottom_controls"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_workoutTitle">
+
+        <LinearLayout
+            android:id="@+id/layout_exercises"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- NOTE: You would typically generate these dynamically or use a RecyclerView -->
+            <CheckBox
+                style="@val/WorkoutCheckBox"
+                android:text="Push-ups: 3 sets x 10 reps" />
+
+            <CheckBox
+                style="@style/WorkoutCheckBox"
+                android:text="Squats: 3 sets x 12 reps" />
+
+            <CheckBox
+                style="@style/WorkoutCheckBox"
+                android:checked="true"
+                android:text="Plank: 3 sets x 30 seconds" />
+
+            <CheckBox
+                style="@style/WorkoutCheckBox"
+                android:text="Dumbbell Rows: 3 sets x 10 reps per arm" />
+
+            <CheckBox
+                style="@style/WorkoutCheckBox"
+                android:text="Lunges: 3 sets x 10 reps per leg" />
+
+            <CheckBox
+                style="@style/WorkoutCheckBox"
+                android:text="Bicep Curls: 3 sets x 12 reps" />
+
+            <CheckBox
+                style="@style/WorkoutCheckBox"
+                android:text="Overhead Press: 3 sets x 10 reps" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
