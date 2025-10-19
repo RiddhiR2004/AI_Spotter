@@ -122,7 +122,7 @@
 
             <!-- NOTE: You would typically generate these dynamically or use a RecyclerView -->
             <CheckBox
-                style="@val/WorkoutCheckBox"
+                style="@style/WorkoutCheckBox"
                 android:text="Push-ups: 3 sets x 10 reps" />
 
             <CheckBox
