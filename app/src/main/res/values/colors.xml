@@ -13,4 +13,6 @@
     <color name="red_negative">#FF5252</color>
     <color name="green_positive">#69F0AE</color>
     <color name="accent_blue">#68A7EA</color>
+    <color name="vibrant_green">#69F0AE</color>
+
 </resources>

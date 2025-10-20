@@ -103,55 +103,43 @@
     </LinearLayout>
 
 
-    <!-- Scrollable Exercise List -->
-    <ScrollView
+    <!-- Day Selector Tabs -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_days"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        app:tabMode="scrollable"
+        app:tabTextColor="@android:color/white"
+        app:tabSelectedTextColor="@color/vibrant_green"
+        app:tabIndicatorColor="@color/vibrant_green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_workoutTitle" />
+
+    <!-- RecyclerView for Exercise List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_exercises"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toTopOf="@+id/layout_bottom_controls"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_workoutTitle">
+        app:layout_constraintTop_toBottomOf="@+id/tab_days" />
 
-        <LinearLayout
-            android:id="@+id/layout_exercises"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!-- NOTE: You would typically generate these dynamically or use a RecyclerView -->
-            <CheckBox
-                style="@style/WorkoutCheckBox"
-                android:text="Push-ups: 3 sets x 10 reps" />
-
-            <CheckBox
-                style="@style/WorkoutCheckBox"
-                android:text="Squats: 3 sets x 12 reps" />
-
-            <CheckBox
-                style="@style/WorkoutCheckBox"
-                android:checked="true"
-                android:text="Plank: 3 sets x 30 seconds" />
-
-            <CheckBox
-                style="@style/WorkoutCheckBox"
-                android:text="Dumbbell Rows: 3 sets x 10 reps per arm" />
-
-            <CheckBox
-                style="@style/WorkoutCheckBox"
-                android:text="Lunges: 3 sets x 10 reps per leg" />
-
-            <CheckBox
-                style="@style/WorkoutCheckBox"
-                android:text="Bicep Curls: 3 sets x 12 reps" />
-
-            <CheckBox
-                style="@style/WorkoutCheckBox"
-                android:text="Overhead Press: 3 sets x 10 reps" />
-
-        </LinearLayout>
-    </ScrollView>
+    <!-- Progress Indicator -->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

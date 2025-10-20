@@ -5,396 +5,134 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/deep_purple_bg"
+    android:padding="24dp"
     tools:context=".ProgressTrackingActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/app_bar"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
+    <!-- Header with Back Button -->
+    <ImageView
+        android:id="@+id/imageView_back"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_arrow_back"
+        android:contentDescription="Back"
+        app:tint="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/icon_back"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/ic_arrow_back"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@android:color/white"
-            android:contentDescription="Back" />
+    <TextView
+        android:id="@+id/textView_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Progress Tracking"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView_back"
+        app:layout_constraintTop_toTopOf="@+id/imageView_back" />
 
-        <TextView
-            android:id="@+id/text_progress_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:fontFamily="@font/poppins_bold"
-            android:text="Progress"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/icon_back"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/text_this_week"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_bold"
-            android:text="This Week"
-            android:textColor="@color/accent_purple"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <!-- Scrollable Content -->
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_bar"
+        android:layout_marginTop="24dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_bar">
+        app:layout_constraintTop_toBottomOf="@+id/imageView_back">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="24dp">
+            android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <!-- Overall Progress Card -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/card_background_dark"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_workouts_completed"
-                    style="@style/ProgressStatCard"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
-                    <LinearLayout style="@style/ProgressStatContent">
-                        <TextView
-                            style="@style/ProgressStatLabel"
-                            android:text="Workouts Completed" />
-                        <TextView
-                            style="@style/ProgressStatValue"
-                            android:text="28" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_active_days"
-                    style="@style/ProgressStatCard"
-                    android:layout_marginStart="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/card_workouts_completed"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <LinearLayout style="@style/ProgressStatContent">
-                        <TextView
-                            style="@style/ProgressStatLabel"
-                            android:text="Active Days" />
-                        <TextView
-                            style="@style/ProgressStatValue"
-                            android:text="82" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_current_streak"
-                    style="@style/ProgressStatCard"
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/card_workouts_completed">
-
-                    <LinearLayout style="@style/ProgressStatContent">
-                        <TextView
-                            style="@style/ProgressStatLabel"
-                            android:text="Current Streak" />
-                        <TextView
-                            style="@style/ProgressStatValue"
-                            android:text="12 days" />
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.cardview.widget.CardView
-                style="@style/ChartCard"
-                android:layout_marginTop="24dp">
-
-                <LinearLayout style="@style/ChartCardContent">
                     <TextView
-                        style="@style/ChartTitle"
-                        android:text="Weight Journey" />
-
-                    <LinearLayout
+                        android:id="@+id/textView_overall_progress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="bottom"
-                        android:orientation="horizontal">
+                        android:fontFamily="@font/poppins"
+                        android:lineSpacingExtra="6dp"
+                        android:text="🎯 Overall Progress\n\n0% Complete\n\n0 / 0 exercises completed"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_bold"
-                            android:text="150"
-                            android:textColor="@android:color/white"
-                            android:textSize="32sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            android:fontFamily="@font/poppins_bold"
-                            android:text="lbs"
-                            android:textColor="@android:color/white"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:fontFamily="@font/poppins"
-                            android:text="This Month"
-                            android:textColor="@color/text_light_grey"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            android:fontFamily="@font/poppins_bold"
-                            android:text="-5%"
-                            android:textColor="@color/red_negative"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="16dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/chart_weight_journey_placeholder"
-                        android:contentDescription="Weight Journey Chart" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/ChartLabel"
-                            android:text="Week 1" />
-
-                        <TextView
-                            style="@style/ChartLabel"
-                            android:text="Week 2" />
-
-                        <TextView
-                            style="@style/ChartLabel"
-                            android:text="Week 3" />
-
-                        <TextView
-                            style="@style/ChartLabel"
-                            android:text="Week 4" />
-                    </LinearLayout>
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <androidx.cardview.widget.CardView
-                style="@style/ChartCard"
-                android:layout_marginTop="24dp">
-
-                <LinearLayout style="@style/ChartCardContent">
-                    <TextView
-                        style="@style/ChartTitle"
-                        android:text="Workout Consistency" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="bottom"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_bold"
-                            android:text="12"
-                            android:textColor="@android:color/white"
-                            android:textSize="32sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            android:fontFamily="@font/poppins_bold"
-                            android:text="workouts"
-                            android:textColor="@android:color/white"
-                            android:textSize="18sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:fontFamily="@font/poppins"
-                            android:text="This Month"
-                            android:textColor="@color/text_light_grey"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="4dp"
-                            android:fontFamily="@font/poppins_bold"
-                            android:text="+10%"
-                            android:textColor="@color/green_positive"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="16dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/chart_workout_consistency_placeholder"
-                        android:contentDescription="Workout Consistency Chart" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            style="@style/ChartLabel"
-                            android:text="Week 1" />
-
-                        <TextView
-                            style="@style/ChartLabel"
-                            android:text="Week 2" />
-
-                        <TextView
-                            style="@style/ChartLabel"
-                            android:text="Week 3" />
-
-                        <TextView
-                            style="@style/ChartLabel"
-                            android:text="Week 4" />
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-
-            <TextView
-                style="@style/SectionTitle"
-                android:layout_marginTop="24dp"
-                android:text="Achievements Unlocked" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_achievements"
+            <!-- Weekly Breakdown Card -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:clipToPadding="false"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:itemCount="5"
-                tools:listitem="@layout/item_achievement" />
+                app:cardBackgroundColor="@color/card_background_dark"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
 
-            <TextView
-                style="@style/SectionTitle"
-                android:layout_marginTop="24dp"
-                android:text="Recent Workouts" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
-            <LinearLayout
-                android:id="@+id/layout_recent_workouts"
+                    <TextView
+                        android:id="@+id/textView_weekly_breakdown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:lineSpacingExtra="6dp"
+                        android:text="📅 Weekly Breakdown\n\n⬜ Monday: 0/0 (0%)\n⬜ Tuesday: 0/0 (0%)\n⬜ Wednesday: 0/0 (0%)\n⬜ Thursday: 0/0 (0%)\n⬜ Friday: 0/0 (0%)\n⬜ Saturday: 0/0 (0%)\n⬜ Sunday: 0/0 (0%)"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Statistics Card -->
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:orientation="vertical">
+                app:cardBackgroundColor="@color/card_background_dark"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
 
-                <include layout="@layout/item_recent_workout" />
-                <include layout="@layout/item_recent_workout" />
-                <include layout="@layout/item_recent_workout" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/textView_stats"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:lineSpacingExtra="6dp"
+                        android:text="📊 Statistics\n\nDays Completed: 0 / 7\nGoal: Build Muscle\nPlan Duration: 4 weeks\n\n🚀 Ready to start? You got this!"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
     </ScrollView>
-
-    <LinearLayout
-        android:id="@+id/bottom_navigation_bar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/card_background_dark"
-        android:elevation="8dp"
-        android:orientation="horizontal"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:weightSum="4"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <LinearLayout
-            style="@style/BottomNavItem"
-            android:tag="home">
-            <ImageView
-                style="@style/BottomNavIcon"
-                android:src="@drawable/ic_home" />
-            <TextView
-                style="@style/BottomNavLabel"
-                android:text="Home" />
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/BottomNavItem"
-            android:tag="workouts">
-            <ImageView
-                style="@style/BottomNavIcon"
-                android:src="@drawable/ic_workouts" />
-            <TextView
-                style="@style/BottomNavLabel"
-                android:text="Workouts" />
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/BottomNavItem"
-            android:tag="progress">
-            <ImageView
-                style="@style/BottomNavIcon"
-                android:src="@drawable/ic_progress_active" />
-            <TextView
-                style="@style/BottomNavLabel"
-                android:text="Progress"
-                android:textColor="@color/accent_purple" />
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/BottomNavItem"
-            android:tag="profile">
-            <ImageView
-                style="@style/BottomNavIcon"
-                android:src="@drawable/ic_profile" />
-            <TextView
-                style="@style/BottomNavLabel"
-                android:text="Profile" />
-        </LinearLayout>
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

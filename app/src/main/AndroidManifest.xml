@@ -20,7 +20,7 @@
             android:name=".ProgressTrackingActivity"
             android:exported="false" />
         <activity
-            android:name=".ExerciseDetailsActivity"
+            android:name=".ExerciseDetailActivity"
             android:exported="false" />
         <activity
             android:name=".WorkoutPlanActivity"
