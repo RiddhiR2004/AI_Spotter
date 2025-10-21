@@ -122,83 +122,361 @@
                 style="@style/SettingsSectionHeader"
                 android:text="ACCOUNT" />
 
-            <include layout="@layout/item_settings_row"
+            <!-- Account Details Row -->
+            <LinearLayout
                 android:id="@+id/row_account_details"
-                app:iconSrc="@drawable/ic_settings_account"
-                app:titleText="Account Details" />
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Account Details"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+                    
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_arrow_chevron_right"
+                    app:tint="@color/text_light_grey"
+                    android:contentDescription="Navigate" />
+            </LinearLayout>
 
-            <include layout="@layout/item_settings_row"
+            <!-- Connected Accounts Row -->
+            <LinearLayout
                 android:id="@+id/row_connected_accounts"
-                app:iconSrc="@drawable/ic_settings_link"
-                app:titleText="Connected Accounts" />
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Connected Accounts"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+                    
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_arrow_chevron_right"
+                    app:tint="@color/text_light_grey"
+                    android:contentDescription="Navigate" />
+            </LinearLayout>
 
             <TextView
                 style="@style/SettingsSectionHeader"
                 android:text="NOTIFICATIONS" />
 
-            <include layout="@layout/item_settings_switch_row"
+            <!-- Workout Reminders Switch -->
+            <LinearLayout
                 android:id="@+id/row_workout_reminders"
-                app:iconSrc="@drawable/ic_settings_workout"
-                app:titleText="Workout Reminders"
-                app:switchChecked="true" />
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@color/deep_purple_bg">
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Workout Reminders"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+                    
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_workout_reminders"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/SettingsSwitch" />
+            </LinearLayout>
 
-            <include layout="@layout/item_settings_switch_row"
+            <!-- Progress Updates Switch -->
+            <LinearLayout
                 android:id="@+id/row_progress_updates"
-                app:iconSrc="@drawable/ic_settings_progress"
-                app:titleText="Progress Updates"
-                app:switchChecked="true" />
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@color/deep_purple_bg">
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Progress Updates"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+                    
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_progress_updates"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/SettingsSwitch" />
+            </LinearLayout>
 
-            <include layout="@layout/item_settings_switch_row"
+            <!-- Promotional Messages Switch -->
+            <LinearLayout
                 android:id="@+id/row_promotional_messages"
-                app:iconSrc="@drawable/ic_settings_promo"
-                app:titleText="Promotional Messages"
-                app:switchChecked="false" />
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@color/deep_purple_bg">
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Promotional Messages"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+                    
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_promotional_messages"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/SettingsSwitch" />
+            </LinearLayout>
 
             <TextView
                 style="@style/SettingsSectionHeader"
                 android:text="APP" />
 
-            <include layout="@layout/item_settings_value_row"
+            <!-- Units Row -->
+            <LinearLayout
                 android:id="@+id/row_units"
-                app:iconSrc="@drawable/ic_settings_units"
-                app:titleText="Units"
-                app:valueText="kg" />
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Units"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+                    
+                <TextView
+                    android:id="@+id/text_units_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="kg"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/text_light_grey"
+                    android:textSize="16sp" />
+                    
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_arrow_chevron_right"
+                    app:tint="@color/text_light_grey"
+                    android:contentDescription="Navigate" />
+            </LinearLayout>
 
-            <include layout="@layout/item_settings_value_row"
+            <!-- Language Row -->
+            <LinearLayout
                 android:id="@+id/row_language"
-                app:iconSrc="@drawable/ic_settings_language"
-                app:titleText="Language"
-                app:valueText="English" />
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Language"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+                    
+                <TextView
+                    android:id="@+id/text_language_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="English"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/text_light_grey"
+                    android:textSize="16sp" />
+                    
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_arrow_chevron_right"
+                    app:tint="@color/text_light_grey"
+                    android:contentDescription="Navigate" />
+            </LinearLayout>
 
-            <include layout="@layout/item_settings_switch_row"
+            <!-- Dark Mode Switch -->
+            <LinearLayout
                 android:id="@+id/row_dark_mode"
-                app:iconSrc="@drawable/ic_settings_dark_mode"
-                app:titleText="Dark Mode"
-                app:switchChecked="true" />
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@color/deep_purple_bg">
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Dark Mode"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+                    
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switch_dark_mode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/SettingsSwitch" />
+            </LinearLayout>
 
             <TextView
                 style="@style/SettingsSectionHeader"
                 android:text="SUPPORT and LEGAL" />
 
-            <include layout="@layout/item_settings_row"
+            <!-- Help Center Row -->
+            <LinearLayout
                 android:id="@+id/row_help_center"
-                app:iconSrc="@drawable/ic_settings_help"
-                app:titleText="Help Center" />
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Help Center"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+                    
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_arrow_chevron_right"
+                    app:tint="@color/text_light_grey"
+                    android:contentDescription="Navigate" />
+            </LinearLayout>
 
-            <include layout="@layout/item_settings_row"
+            <!-- Send Feedback Row -->
+            <LinearLayout
                 android:id="@+id/row_send_feedback"
-                app:iconSrc="@drawable/ic_settings_feedback"
-                app:titleText="Send Feedback" />
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Send Feedback"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+                    
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_arrow_chevron_right"
+                    app:tint="@color/text_light_grey"
+                    android:contentDescription="Navigate" />
+            </LinearLayout>
 
-            <include layout="@layout/item_settings_row"
+            <!-- Privacy Policy Row -->
+            <LinearLayout
                 android:id="@+id/row_privacy_policy"
-                app:iconSrc="@drawable/ic_settings_privacy"
-                app:titleText="Privacy Policy" />
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Privacy Policy"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+                    
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_arrow_chevron_right"
+                    app:tint="@color/text_light_grey"
+                    android:contentDescription="Navigate" />
+            </LinearLayout>
 
-            <include layout="@layout/item_settings_row"
+            <!-- Terms of Service Row -->
+            <LinearLayout
                 android:id="@+id/row_terms_of_service"
-                app:iconSrc="@drawable/ic_settings_terms"
-                app:titleText="Terms of Service" />
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true">
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Terms of Service"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+                    
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_arrow_chevron_right"
+                    app:tint="@color/text_light_grey"
+                    android:contentDescription="Navigate" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/button_logout"

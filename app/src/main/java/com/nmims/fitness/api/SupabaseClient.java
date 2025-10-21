@@ -201,5 +201,42 @@ public class SupabaseClient {
             }
         });
     }
+
+    /**
+     * Get user profile from surveys table
+     */
+    public void getUserProfile(String userId, SupabaseCallback callback) {
+        // Extract the numeric hash from userId (format: "user_12345")
+        String userIdParam = userId;
+        
+        Request request = new Request.Builder()
+                .url(SUPABASE_URL + "/rest/v1/surveys?email=ilike.*&order=created_at.desc&limit=1")
+                .get()
+                .addHeader("apikey", SUPABASE_API_KEY)
+                .addHeader("Authorization", "Bearer " + SUPABASE_API_KEY)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e(TAG, "Failed to fetch user profile", e);
+                callback.onError("Network error: " + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                try (response) {
+                    String responseBody = response.body().string();
+                    
+                    if (response.isSuccessful()) {
+                        callback.onSuccess(responseBody);
+                    } else {
+                        Log.e(TAG, "Failed to fetch user profile: " + response.code());
+                        callback.onError("Failed to fetch profile: " + response.code());
+                    }
+                }
+            }
+        });
+    }
 }
 

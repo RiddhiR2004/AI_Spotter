@@ -67,6 +67,12 @@ public class HomeActivity extends AppCompatActivity {
         viewProgressButton = findViewById(R.id.button_view_progress);
         viewFullPlanButton = findViewById(R.id.button_view_full_plan);
         
+        // Settings icon
+        findViewById(R.id.icon_settings).setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
+            startActivity(intent);
+        });
+        
         // Set welcome message
         String greeting = getGreeting();
         welcomeTextView.setText(greeting + "!");
