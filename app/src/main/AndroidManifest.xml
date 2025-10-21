@@ -14,6 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FITNESS">
         <activity
+            android:name=".PersonalDetailStep3Activity"
+            android:exported="false" />
+        <activity
             android:name=".PersonalDetailStep2Activity"
             android:exported="false" />
         <activity

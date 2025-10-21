@@ -160,4 +160,11 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="WorkoutChip" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="android:textColor">@color/chip_text_color</item>
+        <item name="chipBackgroundColor">@color/chip_background_color</item>
+        <item name="chipCornerRadius">12dp</item>
+        <item name="chipStrokeWidth">0dp</item>
+    </style>
+
 </resources>
