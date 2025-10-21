@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/deep_purple_bg"
+    tools:context=".SettingsActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/app_bar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/icon_back"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_arrow_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@android:color/white"
+            android:contentDescription="Back" />
+
+        <TextView
+            android:id="@+id/text_settings_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Settings"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingBottom="24dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <ImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/ic_profile_placeholder"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="Profile Avatar" />
+
+                <TextView
+                    android:id="@+id/text_user_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:text="Alex Morgan"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toStartOf="@+id/button_edit_profile"
+                    app:layout_constraintStart_toEndOf="@+id/profile_image"
+                    app:layout_constraintTop_toTopOf="@+id/profile_image" />
+
+                <TextView
+                    android:id="@+id/text_user_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:text="alex.morgan@email.com"
+                    android:textColor="@color/text_light_grey"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+                    app:layout_constraintEnd_toStartOf="@+id/button_edit_profile"
+                    app:layout_constraintStart_toStartOf="@+id/text_user_name"
+                    app:layout_constraintTop_toBottomOf="@+id/text_user_name" />
+
+                <Button
+                    android:id="@+id/button_edit_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:background="@drawable/button_background_purple"
+                    android:fontFamily="@font/poppins_bold"
+                    android:minWidth="0dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="Edit Profile"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                style="@style/SettingsSectionHeader"
+                android:text="ACCOUNT" />
+
+            <include layout="@layout/item_settings_row"
+                android:id="@+id/row_account_details"
+                app:iconSrc="@drawable/ic_settings_account"
+                app:titleText="Account Details" />
+
+            <include layout="@layout/item_settings_row"
+                android:id="@+id/row_connected_accounts"
+                app:iconSrc="@drawable/ic_settings_link"
+                app:titleText="Connected Accounts" />
+
+            <TextView
+                style="@style/SettingsSectionHeader"
+                android:text="NOTIFICATIONS" />
+
+            <include layout="@layout/item_settings_switch_row"
+                android:id="@+id/row_workout_reminders"
+                app:iconSrc="@drawable/ic_settings_workout"
+                app:titleText="Workout Reminders"
+                app:switchChecked="true" />
+
+            <include layout="@layout/item_settings_switch_row"
+                android:id="@+id/row_progress_updates"
+                app:iconSrc="@drawable/ic_settings_progress"
+                app:titleText="Progress Updates"
+                app:switchChecked="true" />
+
+            <include layout="@layout/item_settings_switch_row"
+                android:id="@+id/row_promotional_messages"
+                app:iconSrc="@drawable/ic_settings_promo"
+                app:titleText="Promotional Messages"
+                app:switchChecked="false" />
+
+            <TextView
+                style="@style/SettingsSectionHeader"
+                android:text="APP" />
+
+            <include layout="@layout/item_settings_value_row"
+                android:id="@+id/row_units"
+                app:iconSrc="@drawable/ic_settings_units"
+                app:titleText="Units"
+                app:valueText="kg" />
+
+            <include layout="@layout/item_settings_value_row"
+                android:id="@+id/row_language"
+                app:iconSrc="@drawable/ic_settings_language"
+                app:titleText="Language"
+                app:valueText="English" />
+
+            <include layout="@layout/item_settings_switch_row"
+                android:id="@+id/row_dark_mode"
+                app:iconSrc="@drawable/ic_settings_dark_mode"
+                app:titleText="Dark Mode"
+                app:switchChecked="true" />
+
+            <TextView
+                style="@style/SettingsSectionHeader"
+                android:text="SUPPORT and LEGAL" />
+
+            <include layout="@layout/item_settings_row"
+                android:id="@+id/row_help_center"
+                app:iconSrc="@drawable/ic_settings_help"
+                app:titleText="Help Center" />
+
+            <include layout="@layout/item_settings_row"
+                android:id="@+id/row_send_feedback"
+                app:iconSrc="@drawable/ic_settings_feedback"
+                app:titleText="Send Feedback" />
+
+            <include layout="@layout/item_settings_row"
+                android:id="@+id/row_privacy_policy"
+                app:iconSrc="@drawable/ic_settings_privacy"
+                app:titleText="Privacy Policy" />
+
+            <include layout="@layout/item_settings_row"
+                android:id="@+id/row_terms_of_service"
+                app:iconSrc="@drawable/ic_settings_terms"
+                app:titleText="Terms of Service" />
+
+            <Button
+                android:id="@+id/button_logout"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/button_logout_background"
+                android:drawableStart="@drawable/ic_settings_logout"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center_vertical|start"
+                android:paddingStart="24dp"
+                android:text="Logout"
+                android:textAllCaps="false"
+                android:textColor="@color/red_negative"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

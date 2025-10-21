@@ -142,5 +142,20 @@
         <item name="android:textSize">10sp</item>
         <item name="android:layout_marginTop">2dp</item>
     </style>
+    <style name="SettingsSwitch" parent="Theme.AppCompat.Light">
+        <item name="colorSwitchThumbNormal">#B0B0B0</item>
+        <item name="colorControlActivated">@color/accent_purple</item>
+        <item name="colorOnSurface">#FFFFFF</item>
+    </style>
+
+    <style name="SettingsSectionHeader">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:textColor">@color/text_light_grey</item>
+        <item name="android:textSize">12sp</item>
+    </style>
 
 </resources>
