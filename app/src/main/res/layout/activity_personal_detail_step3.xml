@@ -123,42 +123,47 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/goalsTitle">
+            app:layout_constraintTop_toBottomOf="@id/goalsTitle"
+            app:selectionRequired="true"
+            app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipBuildMuscle"
                 style="@style/WorkoutChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Build Muscle" />
+                android:text="Build Muscle"
+                android:checkable="true" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipLoseWeight"
                 style="@style/WorkoutChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Lose Weight" />
+                android:text="Lose Weight"
+                android:checkable="true" />
+
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipImproveEndurance"
                 style="@style/WorkoutChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Improve Endurance" />
+                android:checkable="true" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipIncreaseFlexibility"
                 style="@style/WorkoutChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Increase Flexibility" />
+                android:checkable="true" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipGeneralFitness"
                 style="@style/WorkoutChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="General Fitness" />
+                android:checkable="true" />
         </com.google.android.material.chip.ChipGroup>
 
         <TextView
