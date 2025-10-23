@@ -26,17 +26,25 @@ import org.json.JSONException;
 public class WorkoutPlanActivity extends AppCompatActivity implements ExerciseAdapter.OnExerciseClickListener {
 
     private static final String TAG = "WorkoutPlanActivity";
-    
+
     private TabLayout tabDays;
     private RecyclerView recyclerExercises;
     private TextView titleTextView;
     private ProgressBar progressBar;
-    
+
     private WorkoutPlan workoutPlan;
     private ExerciseAdapter exerciseAdapter;
     private int currentDayIndex = 0;
     private String userId;
     private boolean isNewPlan = false;
+
+    // --- START OF FIX 1: Add variables to hold all user data ---
+    private String name, email, goal, activityFrequency, injuries, bmiCategory;
+    private int age;
+    private double height, weight, bmi, availableHours;
+    private boolean hasEquipment;
+    // --- END OF FIX 1 ---
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,24 +59,31 @@ public class WorkoutPlanActivity extends AppCompatActivity implements ExerciseAd
         if (userId == null) {
             userId = MainActivity.getUserId(this);
         }
-        
-        String name = getIntent().getStringExtra("USER_NAME");
-        String email = getIntent().getStringExtra("USER_EMAIL");
-        int age = getIntent().getIntExtra("USER_AGE", 25);
-        double height = getIntent().getDoubleExtra("USER_HEIGHT", 170.0);
-        double weight = getIntent().getDoubleExtra("USER_WEIGHT", 70.0);
-        double bmi = getIntent().getDoubleExtra("USER_BMI", 22.5);
-        String goal = getIntent().getStringExtra("USER_GOAL");
-        boolean hasEquipment = getIntent().getBooleanExtra("HAS_EQUIPMENT", true);
+
+        // --- START OF FIX 2: Get ALL data from the Intent ---
+        name = getIntent().getStringExtra("USER_NAME");
+        email = getIntent().getStringExtra("USER_EMAIL");
+        age = getIntent().getIntExtra("USER_AGE", 25);
+        height = getIntent().getDoubleExtra("USER_HEIGHT", 170.0);
+        weight = getIntent().getDoubleExtra("USER_WEIGHT", 70.0);
+        bmi = getIntent().getDoubleExtra("USER_BMI", 22.5);
+        goal = getIntent().getStringExtra("USER_GOAL"); // This will have all goals
+        hasEquipment = getIntent().getBooleanExtra("HAS_EQUIPMENT", true);
+
+        // Get the NEW fields from Step 2 and 3
+        activityFrequency = getIntent().getStringExtra("ACTIVITY_FREQUENCY");
+        availableHours = getIntent().getDoubleExtra("AVAILABLE_HOURS", 1.0); // Default to 1 hour
+        injuries = getIntent().getStringExtra("INJURIES");
+        // --- END OF FIX 2 ---
 
         // Calculate BMI category
-        String bmiCategory = getBMICategory(bmi);
+        bmiCategory = getBMICategory(bmi);
 
-        // First try to load an existing plan; only generate if none
-        loadExistingPlanOrGenerate(name, age, bmi, bmiCategory, goal, hasEquipment);
+        // --- START OF FIX 3: Call the refactored method (no parameters) ---
+        // This method will now use the class variables we just set
+        loadExistingPlanOrGenerate();
+        // --- END OF FIX 3 ---
     }
-
-// Add this helper method to WorkoutPlanActivity:
 
     private String getBMICategory(double bmi) {
         if (bmi < 18.5) return "Underweight";
@@ -77,27 +92,22 @@ public class WorkoutPlanActivity extends AppCompatActivity implements ExerciseAd
         return "Obese";
     }
 
-
     private void initViews() {
         tabDays = findViewById(R.id.tab_days);
         recyclerExercises = findViewById(R.id.recycler_exercises);
         titleTextView = findViewById(R.id.textView_workoutTitle);
         progressBar = findViewById(R.id.progress_bar);
-        
+
         findViewById(R.id.imageView_back).setOnClickListener(v -> finish());
-        
+
         tabDays.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 currentDayIndex = tab.getPosition();
                 displayWorkoutDay(currentDayIndex);
             }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {}
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {}
+            @Override public void onTabUnselected(TabLayout.Tab tab) {}
+            @Override public void onTabReselected(TabLayout.Tab tab) {}
         });
     }
 
@@ -105,8 +115,9 @@ public class WorkoutPlanActivity extends AppCompatActivity implements ExerciseAd
         recyclerExercises.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private void loadExistingPlanOrGenerate(String name, int age, double bmi, String bmiCategory,
-                                            String goal, boolean hasGymEquipment) {
+    // --- START OF FIX 4: Refactor method to use class variables ---
+    // (Removed all parameters from the method signature)
+    private void loadExistingPlanOrGenerate() {
         showLoading(true);
         SupabaseClient supabaseClient = new SupabaseClient();
         supabaseClient.getWorkoutPlan(userId, new SupabaseClient.WorkoutPlanCallback() {
@@ -116,6 +127,7 @@ public class WorkoutPlanActivity extends AppCompatActivity implements ExerciseAd
                     try {
                         org.json.JSONArray plansArray = new org.json.JSONArray(jsonResponse);
                         if (plansArray.length() > 0) {
+                            // ... (parsing logic is fine)
                             org.json.JSONObject planJson = plansArray.getJSONObject(0);
                             String workoutDaysJson = planJson.getString("workout_days");
 
@@ -133,13 +145,12 @@ public class WorkoutPlanActivity extends AppCompatActivity implements ExerciseAd
                             showLoading(false);
                         } else {
                             // No plan found; generate a new one
-                            generateWorkoutPlan(name, age, bmi, bmiCategory, goal,
-                                    "3-4 times/week", 1.5, hasGymEquipment, null);
+                            // This call now uses the class variables
+                            generateWorkoutPlan();
                         }
                     } catch (Exception e) {
                         Log.e(TAG, "Error parsing existing plan; generating new one", e);
-                        generateWorkoutPlan(name, age, bmi, bmiCategory, goal,
-                                "3-4 times/week", 1.5, hasGymEquipment, null);
+                        generateWorkoutPlan(); // Use class variables
                     }
                 });
             }
@@ -148,57 +159,61 @@ public class WorkoutPlanActivity extends AppCompatActivity implements ExerciseAd
             public void onError(String error) {
                 runOnUiThread(() -> {
                     Log.d(TAG, "No existing plan or error ('" + error + "'), generating new plan");
-                    generateWorkoutPlan(name, age, bmi, bmiCategory, goal,
-                            "3-4 times/week", 1.5, hasGymEquipment, null);
+                    generateWorkoutPlan(); // Use class variables
                 });
             }
         });
     }
 
-    private void generateWorkoutPlan(String name, int age, double bmi, String bmiCategory,
-                                    String goal, String activityFrequency, double availableHours,
-                                    boolean hasGymEquipment, String injuries) {
-        
+    // --- START OF FIX 5: Refactor method to use class variables ---
+    // (Removed all parameters from the method signature)
+    private void generateWorkoutPlan() {
         showLoading(true);
-        Toast.makeText(this, "Generating your personalized workout plan...\nThis may take 20-30 seconds", 
-                      Toast.LENGTH_LONG).show();
-        
+        Toast.makeText(this, "Generating your personalized workout plan...\nThis may take 20-30 seconds",
+                Toast.LENGTH_LONG).show();
+
         GeminiApiClient geminiClient = new GeminiApiClient();
+
+        // This call now passes all the *correct* data from the class variables
         geminiClient.generateWorkoutPlan(name, age, bmi, bmiCategory, goal, activityFrequency,
-                availableHours, hasGymEquipment, injuries, new GeminiApiClient.GeminiCallback() {
-            
-            @Override
-            public void onSuccess(String response) {
-                runOnUiThread(() -> {
-                    try {
-                        workoutPlan = WorkoutParser.parseWorkoutPlan(userId, response);
-                        isNewPlan = true;
-                        displayWorkoutPlan();
-                        showLoading(false);
-                        Toast.makeText(WorkoutPlanActivity.this, 
-                                "Workout plan generated successfully!", Toast.LENGTH_SHORT).show();
-                        savePlanIfNew();
-                    } catch (JSONException e) {
-                        Log.e(TAG, "Error parsing workout plan", e);
-                        showError("Failed to parse workout plan: " + e.getMessage());
-                        showLoading(false);
+                availableHours, hasEquipment, injuries, new GeminiApiClient.GeminiCallback() {
+
+                    @Override
+                    public void onSuccess(String response) {
+                        runOnUiThread(() -> {
+                            try {
+                                workoutPlan = WorkoutParser.parseWorkoutPlan(userId, response);
+                                isNewPlan = true;
+                                displayWorkoutPlan();
+                                showLoading(false);
+                                Toast.makeText(WorkoutPlanActivity.this,
+                                        "Workout plan generated successfully!", Toast.LENGTH_SHORT).show();
+                                savePlanIfNew();
+                            } catch (JSONException e) {
+                                Log.e(TAG, "Error parsing workout plan", e);
+                                showError("Failed to parse workout plan: " + e.getMessage());
+                                showLoading(false);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        runOnUiThread(() -> {
+                            Log.e(TAG, "Gemini API error: " + error);
+                            showError("Failed to generate workout plan. Please check:\n" +
+                                    "1. Internet connection\n" +
+                                    "2. Gemini API key is valid\n" +
+                                    "Error: " + error);
+                            showLoading(false);
+                        });
                     }
                 });
-            }
-
-            @Override
-            public void onError(String error) {
-                runOnUiThread(() -> {
-                    Log.e(TAG, "Gemini API error: " + error);
-                    showError("Failed to generate workout plan. Please check:\n" +
-                             "1. Internet connection\n" +
-                             "2. Gemini API key is valid\n" +
-                             "Error: " + error);
-                    showLoading(false);
-                });
-            }
-        });
     }
+    // --- END OF FIX 5 ---
+
+
+    // --- NO CHANGES NEEDED BELOW THIS LINE ---
 
     private void displayWorkoutPlan() {
         if (workoutPlan == null || workoutPlan.getWorkoutDays().isEmpty()) {
@@ -254,6 +269,7 @@ public class WorkoutPlanActivity extends AppCompatActivity implements ExerciseAd
                 });
             }
 
+           // Opening in ...
             @Override
             public void onError(String error) {
                 Log.d(TAG, "No existing progress found or error loading: " + error);
@@ -261,7 +277,6 @@ public class WorkoutPlanActivity extends AppCompatActivity implements ExerciseAd
             }
         });
     }
-
 
     private void displayWorkoutDay(int dayIndex) {
         if (workoutPlan == null || dayIndex >= workoutPlan.getWorkoutDays().size()) {
@@ -326,7 +341,6 @@ public class WorkoutPlanActivity extends AppCompatActivity implements ExerciseAd
                 .show();
     }
 
-    // Add helper method to show progress:
     private void calculateAndDisplayProgress() {
         if (workoutPlan == null) return;
 
@@ -342,12 +356,9 @@ public class WorkoutPlanActivity extends AppCompatActivity implements ExerciseAd
             }
         }
 
-        float progressPercentage = (float) completedExercises / totalExercises * 100;
+        float progressPercentage = (totalExercises > 0) ? (float) completedExercises / totalExercises * 100 : 0;
         Log.d(TAG, String.format("Overall progress: %.1f%% (%d/%d)",
                 progressPercentage, completedExercises, totalExercises));
-
-        // Update UI with progress
-        // titleTextView.setText(String.format("Progress: %.0f%%", progressPercentage));
     }
 
     @Override
@@ -367,9 +378,7 @@ public class WorkoutPlanActivity extends AppCompatActivity implements ExerciseAd
                     public void onSuccess(String message) {
                         Log.d(TAG, "Progress saved to Supabase");
 
-                        // Optional: Show visual feedback
                         runOnUiThread(() -> {
-                            // You could update a progress bar here
                             calculateAndDisplayProgress();
                         });
                     }
