@@ -81,11 +81,8 @@ public class HomeActivity extends AppCompatActivity {
     private void setupClickListeners() {
         startWorkoutButton.setOnClickListener(v -> {
             if (currentWorkoutPlan != null) {
-                // Navigate to today's workout
-                Intent intent = new Intent(HomeActivity.this, WorkoutPlanActivity.class);
-                intent.putExtra("USER_ID", userId);
-                // Pass workout plan data (you might want to save to DB and just pass ID)
-                // For now, we'll just let WorkoutPlanActivity load it
+                // Navigate to workout mode (exercise-by-exercise view)
+                Intent intent = new Intent(HomeActivity.this, WorkoutModeActivity.class);
                 startActivity(intent);
             } else {
                 Toast.makeText(this, "No workout plan found. Create one first!", 

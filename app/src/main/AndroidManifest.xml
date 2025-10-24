@@ -35,6 +35,9 @@
             android:name=".WorkoutPlanActivity"
             android:exported="false" />
         <activity
+            android:name=".WorkoutModeActivity"
+            android:exported="false" />
+        <activity
             android:name=".PersonalDetailsActivity"
             android:exported="false" />
         <activity

@@ -18,7 +18,7 @@ import okhttp3.Response;
 
 public class GeminiApiClient {
     private static final String TAG = "GeminiApiClient";
-    private static final String GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent";
+    private static final String GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
     
     // TODO: Replace with your actual Gemini API key
     // Get it from: https://makersuite.google.com/app/apikey
