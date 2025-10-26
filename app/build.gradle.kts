@@ -39,6 +39,12 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.cardview)
     implementation(libs.recyclerview)
+    
+    // Markdown rendering for AI chat
+    implementation(libs.core)
+    implementation(libs.ext.strikethrough)
+    implementation(libs.ext.tables)
+    
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

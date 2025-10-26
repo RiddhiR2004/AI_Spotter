@@ -28,6 +28,7 @@ public class PersonalDetailStep2Activity extends AppCompatActivity {
     private String name, email;
     private int age;
     private double height, weight;
+    private int pullUps, dips, pushUps;
 
     // UI Elements
     private AutoCompleteTextView activeDropdown;
@@ -64,6 +65,9 @@ public class PersonalDetailStep2Activity extends AppCompatActivity {
         age = intent.getIntExtra("USER_AGE", -1);
         height = intent.getDoubleExtra("USER_HEIGHT", -1.0);
         weight = intent.getDoubleExtra("USER_WEIGHT", -1.0);
+        pullUps = intent.getIntExtra("CURRENT_PULLUPS", 0);
+        dips = intent.getIntExtra("CURRENT_DIPS", 0);
+        pushUps = intent.getIntExtra("CURRENT_PUSHUPS", 0);
 
         // Check if any data is missing
         return name != null && email != null && age != -1 && height != -1.0 && weight != -1.0;
@@ -119,6 +123,9 @@ public class PersonalDetailStep2Activity extends AppCompatActivity {
             intent.putExtra("USER_AGE", age);
             intent.putExtra("USER_HEIGHT", height);
             intent.putExtra("USER_WEIGHT", weight);
+            intent.putExtra("CURRENT_PULLUPS", pullUps);
+            intent.putExtra("CURRENT_DIPS", dips);
+            intent.putExtra("CURRENT_PUSHUPS", pushUps);
 
             // Pass Step 2 data
             intent.putExtra("ACTIVITY_FREQUENCY", activityFrequency);

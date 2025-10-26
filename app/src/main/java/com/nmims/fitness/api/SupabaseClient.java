@@ -87,7 +87,8 @@ public class SupabaseClient {
                                       boolean completed, SupabaseCallback callback) {
         try {
             JSONObject json = new JSONObject();
-            json.put("user_id", userId);
+            // Convert user_id string to long for bigint field in database
+            json.put("user_id", Long.parseLong(userId));
             json.put("day", day);
             json.put("exercise_name", exerciseName);
             json.put("completed", completed);

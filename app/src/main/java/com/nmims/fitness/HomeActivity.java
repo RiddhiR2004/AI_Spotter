@@ -40,6 +40,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button startWorkoutButton;
     private Button viewProgressButton;
     private Button viewFullPlanButton;
+    private Button aiCoachButton;
     
     private String userId;
     private WorkoutPlan currentWorkoutPlan;
@@ -66,6 +67,7 @@ public class HomeActivity extends AppCompatActivity {
         startWorkoutButton = findViewById(R.id.button_start_workout);
         viewProgressButton = findViewById(R.id.button_view_progress);
         viewFullPlanButton = findViewById(R.id.button_view_full_plan);
+        aiCoachButton = findViewById(R.id.button_ai_coach);
         
         // Settings icon
         findViewById(R.id.icon_settings).setOnClickListener(v -> {
@@ -98,6 +100,11 @@ public class HomeActivity extends AppCompatActivity {
         viewFullPlanButton.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, WorkoutPlanActivity.class);
             intent.putExtra("USER_ID", userId);
+            startActivity(intent);
+        });
+
+        aiCoachButton.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, AICoachActivity.class);
             startActivity(intent);
         });
     }

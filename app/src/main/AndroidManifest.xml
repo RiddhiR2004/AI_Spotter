@@ -38,6 +38,10 @@
             android:name=".WorkoutModeActivity"
             android:exported="false" />
         <activity
+            android:name=".AICoachActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name=".PersonalDetailsActivity"
             android:exported="false" />
         <activity

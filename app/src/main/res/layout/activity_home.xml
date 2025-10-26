@@ -168,7 +168,19 @@
                             android:textColor="@color/text_light_grey"
                 android:textSize="16sp" />
 
-            </LinearLayout>
+            <Button
+                android:id="@+id/button_ai_coach"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/button_gradient_purple"
+                android:fontFamily="@font/poppins_bold"
+                android:text="🤖 AI Fitness Coach"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

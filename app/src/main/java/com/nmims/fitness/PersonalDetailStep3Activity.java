@@ -40,6 +40,7 @@ public class PersonalDetailStep3Activity extends AppCompatActivity {
     private String name, email, activityFrequency;
     private int age;
     private double height, weight, availableHours;
+    private int pullUps, dips, pushUps;
     private boolean hasEquipment;
     private String goal;
     private String injuries;
@@ -81,6 +82,9 @@ public class PersonalDetailStep3Activity extends AppCompatActivity {
         age = intent.getIntExtra("USER_AGE", -1);
         height = intent.getDoubleExtra("USER_HEIGHT", -1.0);
         weight = intent.getDoubleExtra("USER_WEIGHT", -1.0);
+        pullUps = intent.getIntExtra("CURRENT_PULLUPS", 0);
+        dips = intent.getIntExtra("CURRENT_DIPS", 0);
+        pushUps = intent.getIntExtra("CURRENT_PUSHUPS", 0);
         activityFrequency = intent.getStringExtra("ACTIVITY_FREQUENCY");
         availableHours = intent.getDoubleExtra("AVAILABLE_HOURS", -1.0);
 
@@ -125,7 +129,7 @@ public class PersonalDetailStep3Activity extends AppCompatActivity {
         // Perform final calculations
         bmi = weight / Math.pow(height / 100.0, 2);
         bmiCategory = getBMICategory(bmi);
-        userId = "user_" + email.hashCode();
+        // Note: userId will be set from Supabase response after saving
 
         saveToSupabase();
     }
@@ -142,6 +146,9 @@ public class PersonalDetailStep3Activity extends AppCompatActivity {
                 jsonObject.put("age", age);
                 jsonObject.put("height_cm", height);
                 jsonObject.put("weight_kg", weight);
+                jsonObject.put("current_pullups", pullUps);
+                jsonObject.put("current_dips", dips);
+                jsonObject.put("current_pushups", pushUps);
                 jsonObject.put("activity_frequency", activityFrequency);
                 jsonObject.put("available_hours", availableHours);
                 jsonObject.put("gym_equipment", hasEquipment);
@@ -157,6 +164,7 @@ public class PersonalDetailStep3Activity extends AppCompatActivity {
                         .addHeader("apikey", SUPABASE_API_KEY)
                         .addHeader("Authorization", "Bearer " + SUPABASE_API_KEY)
                         .addHeader("Content-Type", "application/json")
+                        .addHeader("Prefer", "return=representation")
                         .build();
 
                 client.newCall(request).enqueue(new Callback() {
@@ -170,6 +178,19 @@ public class PersonalDetailStep3Activity extends AppCompatActivity {
                     public void onResponse(Call call, Response response) {
                         try (response) { // Auto-closes the response
                             String responseBody = response.body().string();
+                            if (response.isSuccessful()) {
+                                // Extract user_id from response
+                                try {
+                                    org.json.JSONArray jsonArray = new org.json.JSONArray(responseBody);
+                                    if (jsonArray.length() > 0) {
+                                        org.json.JSONObject userData = jsonArray.getJSONObject(0);
+                                        userId = String.valueOf(userData.getLong("user_id"));
+                                        Log.d(TAG, "Got user_id from Supabase: " + userId);
+                                    }
+                                } catch (org.json.JSONException e) {
+                                    Log.e(TAG, "Failed to parse user_id from response", e);
+                                }
+                            }
                             handleSaveResponse(response.isSuccessful(), responseBody);
                         } catch (IOException e) {
                             handleSaveResponse(false, "Error reading response: " + e.getMessage());

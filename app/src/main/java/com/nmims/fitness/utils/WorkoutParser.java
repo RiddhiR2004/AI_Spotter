@@ -112,7 +112,13 @@ public class WorkoutParser {
      */
     public static JSONObject workoutPlanToJson(WorkoutPlan plan) throws JSONException {
         JSONObject json = new JSONObject();
-        json.put("user_id", plan.getUserId());
+        // Convert user_id string to long for bigint field in database
+        try {
+            json.put("user_id", Long.parseLong(plan.getUserId()));
+        } catch (NumberFormatException e) {
+            Log.e(TAG, "Invalid user_id format: " + plan.getUserId(), e);
+            throw new JSONException("Invalid user_id format");
+        }
         json.put("plan_name", plan.getPlanName());
         json.put("goal", plan.getGoal());
         json.put("duration_weeks", plan.getDurationWeeks());
