@@ -105,10 +105,13 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
+                        android:layout_marginEnd="8dp"
                         android:fontFamily="@font/lexend_bold"
                         android:text="Alex Morgan"
                         android:textColor="@color/text_gray_900"
                         android:textSize="18sp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         app:layout_constraintEnd_toStartOf="@+id/button_edit_profile"
                         app:layout_constraintStart_toEndOf="@+id/profile_image"
                         app:layout_constraintTop_toTopOf="@+id/profile_image" />
@@ -117,10 +120,13 @@
                         android:id="@+id/text_user_email"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
                         android:fontFamily="@font/lexend"
                         android:text="alex.morgan@email.com"
                         android:textColor="@color/text_gray_600"
                         android:textSize="14sp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         app:layout_constraintBottom_toBottomOf="@+id/profile_image"
                         app:layout_constraintEnd_toStartOf="@+id/button_edit_profile"
                         app:layout_constraintStart_toStartOf="@+id/text_user_name"
@@ -166,12 +172,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <include
-                android:id="@+id/settings_connected_accounts"
-                layout="@layout/item_settings_row"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <!-- Notifications Section -->
             <TextView
                 android:layout_width="wrap_content"
@@ -193,12 +193,6 @@
 
             <include
                 android:id="@+id/settings_progress_updates"
-                layout="@layout/item_settings_switch_row"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <include
-                android:id="@+id/settings_promotional"
                 layout="@layout/item_settings_switch_row"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

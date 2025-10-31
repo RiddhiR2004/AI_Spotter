@@ -34,10 +34,10 @@ public class SettingsActivity extends AppCompatActivity {
     private Button buttonEditProfile, buttonLogout;
     
     // Account rows
-    private View rowAccountDetails, rowConnectedAccounts;
+    private View rowAccountDetails;
     
     // Notification switches
-    private SwitchCompat switchWorkoutReminders, switchProgressUpdates, switchPromotionalMessages;
+    private SwitchCompat switchWorkoutReminders, switchProgressUpdates;
     
     // App settings rows
     private View rowUnits, rowLanguage;
@@ -75,22 +75,21 @@ public class SettingsActivity extends AppCompatActivity {
         
         // Account section - the include itself is the clickable CardView root
         rowAccountDetails = findViewById(R.id.settings_account_details);
-        rowConnectedAccounts = findViewById(R.id.settings_connected_accounts);
         ((TextView) rowAccountDetails.findViewById(R.id.title)).setText("Account Details");
-        ((TextView) rowConnectedAccounts.findViewById(R.id.title)).setText("Connected Accounts");
+        ((ImageView) rowAccountDetails.findViewById(R.id.icon)).setImageResource(R.drawable.ic_settings_account);
         
         // Notification switches - access through include IDs
         View workoutRemindersInclude = findViewById(R.id.settings_workout_reminders);
         View progressUpdatesInclude = findViewById(R.id.settings_progress_updates);
-        View promotionalInclude = findViewById(R.id.settings_promotional);
         
         ((TextView) workoutRemindersInclude.findViewById(R.id.title)).setText("Workout Reminders");
+        ((ImageView) workoutRemindersInclude.findViewById(R.id.icon)).setImageResource(R.drawable.ic_settings_workout);
+        
         ((TextView) progressUpdatesInclude.findViewById(R.id.title)).setText("Progress Updates");
-        ((TextView) promotionalInclude.findViewById(R.id.title)).setText("Promotional Messages");
+        ((ImageView) progressUpdatesInclude.findViewById(R.id.icon)).setImageResource(R.drawable.ic_settings_progress);
         
         switchWorkoutReminders = workoutRemindersInclude.findViewById(R.id.switch_compat);
         switchProgressUpdates = progressUpdatesInclude.findViewById(R.id.switch_compat);
-        switchPromotionalMessages = promotionalInclude.findViewById(R.id.switch_compat);
         
         // App settings - access through include IDs
         View unitsInclude = findViewById(R.id.settings_units);
@@ -98,8 +97,13 @@ public class SettingsActivity extends AppCompatActivity {
         View darkModeInclude = findViewById(R.id.settings_dark_mode);
         
         ((TextView) unitsInclude.findViewById(R.id.title)).setText("Units");
+        ((ImageView) unitsInclude.findViewById(R.id.icon)).setImageResource(R.drawable.ic_settings_units);
+        
         ((TextView) languageInclude.findViewById(R.id.title)).setText("Language");
+        ((ImageView) languageInclude.findViewById(R.id.icon)).setImageResource(R.drawable.ic_settings_language);
+        
         ((TextView) darkModeInclude.findViewById(R.id.title)).setText("Dark Mode");
+        ((ImageView) darkModeInclude.findViewById(R.id.icon)).setImageResource(R.drawable.ic_settings_dark_mode);
         
         rowUnits = unitsInclude;
         rowLanguage = languageInclude;
@@ -115,9 +119,16 @@ public class SettingsActivity extends AppCompatActivity {
         rowTermsOfService = findViewById(R.id.settings_terms);
         
         ((TextView) rowHelpCenter.findViewById(R.id.title)).setText("Help Center");
+        ((ImageView) rowHelpCenter.findViewById(R.id.icon)).setImageResource(R.drawable.ic_settings_help);
+        
         ((TextView) rowSendFeedback.findViewById(R.id.title)).setText("Send Feedback");
+        ((ImageView) rowSendFeedback.findViewById(R.id.icon)).setImageResource(R.drawable.ic_settings_feedback);
+        
         ((TextView) rowPrivacyPolicy.findViewById(R.id.title)).setText("Privacy Policy");
+        ((ImageView) rowPrivacyPolicy.findViewById(R.id.icon)).setImageResource(R.drawable.ic_settings_privacy);
+        
         ((TextView) rowTermsOfService.findViewById(R.id.title)).setText("Terms of Service");
+        ((ImageView) rowTermsOfService.findViewById(R.id.icon)).setImageResource(R.drawable.ic_settings_terms);
         
         // Logout
         buttonLogout = findViewById(R.id.button_logout);
@@ -168,7 +179,6 @@ public class SettingsActivity extends AppCompatActivity {
         // Load notification preferences
         switchWorkoutReminders.setChecked(settings.getBoolean("workout_reminders", true));
         switchProgressUpdates.setChecked(settings.getBoolean("progress_updates", true));
-        switchPromotionalMessages.setChecked(settings.getBoolean("promotional_messages", false));
         
         // Load app preferences
         String units = settings.getString("units", "kg");
@@ -192,9 +202,6 @@ public class SettingsActivity extends AppCompatActivity {
         
         // Account section
         rowAccountDetails.setOnClickListener(v -> showAccountDetails());
-        rowConnectedAccounts.setOnClickListener(v -> {
-            Toast.makeText(this, "Connected Accounts coming soon!", Toast.LENGTH_SHORT).show();
-        });
         
         // Notification switches
         switchWorkoutReminders.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -206,12 +213,6 @@ public class SettingsActivity extends AppCompatActivity {
         switchProgressUpdates.setOnCheckedChangeListener((buttonView, isChecked) -> {
             settings.edit().putBoolean("progress_updates", isChecked).apply();
             Toast.makeText(this, "Progress updates " + (isChecked ? "enabled" : "disabled"), 
-                          Toast.LENGTH_SHORT).show();
-        });
-        
-        switchPromotionalMessages.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            settings.edit().putBoolean("promotional_messages", isChecked).apply();
-            Toast.makeText(this, "Promotional messages " + (isChecked ? "enabled" : "disabled"), 
                           Toast.LENGTH_SHORT).show();
         });
         
