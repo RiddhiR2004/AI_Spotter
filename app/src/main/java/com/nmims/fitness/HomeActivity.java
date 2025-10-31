@@ -251,7 +251,7 @@ public class HomeActivity extends AppCompatActivity {
         progressDetailsTextView.setText(String.format(Locale.getDefault(),
                 "%d / %d exercises done", completedExercises, totalExercises));
     }
-
+    
     private void showNoWorkoutMessage() {
         workoutTitleTextView.setText("No Workout Plan");
         exerciseCountTextView.setText("Create a personalized plan by completing your profile");
