@@ -58,6 +58,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
         TextView nameTextView;
         TextView detailsTextView;
         TextView musclesTextView;
+        View exerciseContent;
 
         public ExerciseViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -65,24 +66,30 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
             nameTextView = itemView.findViewById(R.id.exercise_name);
             detailsTextView = itemView.findViewById(R.id.exercise_details);
             musclesTextView = itemView.findViewById(R.id.exercise_muscles);
+            exerciseContent = itemView.findViewById(R.id.exercise_content);
 
-            // Click on entire item to see details
-            itemView.setOnClickListener(v -> {
-                int position = getAdapterPosition();
-                if (position != RecyclerView.NO_POSITION && listener != null) {
-                    listener.onExerciseClick(exercises.get(position), position);
-                }
-            });
+            // Click on content area (not checkbox) to see details
+            if (exerciseContent != null) {
+                exerciseContent.setOnClickListener(v -> {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && listener != null) {
+                        listener.onExerciseClick(exercises.get(position), position);
+                    }
+                });
+            }
 
-            // Checkbox for marking complete
-            checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                int position = getAdapterPosition();
-                if (position != RecyclerView.NO_POSITION && listener != null) {
-                    Exercise exercise = exercises.get(position);
-                    exercise.setCompleted(isChecked);
-                    listener.onExerciseChecked(exercise, position, isChecked);
-                }
-            });
+            // Checkbox for marking complete (separate click handling)
+            if (checkBox != null) {
+                checkBox.setOnClickListener(v -> {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION && listener != null) {
+                        Exercise exercise = exercises.get(position);
+                        boolean isChecked = checkBox.isChecked();
+                        exercise.setCompleted(isChecked);
+                        listener.onExerciseChecked(exercise, position, isChecked);
+                    }
+                });
+            }
         }
 
         public void bind(Exercise exercise, int position) {
@@ -107,18 +114,12 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
             }
             
             detailsTextView.setText(details.toString());
-            musclesTextView.setText(exercise.getTargetMuscles());
+            musclesTextView.setText("Target: " + exercise.getTargetMuscles());
             
-            // Set checkbox state without triggering listener
-            checkBox.setOnCheckedChangeListener(null);
-            checkBox.setChecked(exercise.isCompleted());
-            checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                int pos = getAdapterPosition();
-                if (pos != RecyclerView.NO_POSITION && listener != null) {
-                    exercise.setCompleted(isChecked);
-                    listener.onExerciseChecked(exercise, pos, isChecked);
-                }
-            });
+            // Set checkbox state (listener is already set in constructor)
+            if (checkBox != null) {
+                checkBox.setChecked(exercise.isCompleted());
+            }
         }
     }
 }

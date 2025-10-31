@@ -32,12 +32,14 @@ public class AICoachActivity extends AppCompatActivity {
     private RecyclerView chatRecyclerView;
     private EditText messageInput;
     private ImageButton sendButton;
+    private ImageButton clearHistoryButton;
     private ProgressBar loadingProgressBar;
 
     private ChatAdapter chatAdapter;
     private List<ChatMessage> messages;
     private AICoachService aiCoachService;
     private String userId;
+    private Markwon markwon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,32 +49,41 @@ public class AICoachActivity extends AppCompatActivity {
         userId = MainActivity.getUserId(this);
         aiCoachService = new AICoachService(this);
 
+        // Initialize Markwon for markdown rendering
+        markwon = Markwon.create(this);
+
         initViews();
         setupRecyclerView();
         
-        // Add welcome message
-        addWelcomeMessage();
+        // Load conversation history from cache
+        loadConversationHistory();
+        
+        // If no history, add welcome message
+        if (messages.isEmpty()) {
+            addWelcomeMessage();
+        }
         
         // Load user context in background
         loadUserContext();
+        
+        // Check for pending messages
+        checkPendingMessages();
     }
 
     private void initViews() {
         chatRecyclerView = findViewById(R.id.recycler_chat);
         messageInput = findViewById(R.id.editText_message);
         sendButton = findViewById(R.id.button_send);
+        clearHistoryButton = findViewById(R.id.button_clear_history);
         loadingProgressBar = findViewById(R.id.progress_loading);
 
         findViewById(R.id.imageView_back).setOnClickListener(v -> finish());
         sendButton.setOnClickListener(v -> sendMessage());
+        clearHistoryButton.setOnClickListener(v -> clearChatHistory());
     }
 
     private void setupRecyclerView() {
         messages = new ArrayList<>();
-        
-        // Initialize Markwon for markdown rendering
-        Markwon markwon = Markwon.create(this);
-        
         chatAdapter = new ChatAdapter(messages, markwon);
         
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -109,8 +120,10 @@ public class AICoachActivity extends AppCompatActivity {
             @Override
             public void onError(String error) {
                 Log.e(TAG, "Failed to load user context: " + error);
-                Toast.makeText(AICoachActivity.this, 
-                    "Warning: Could not load full context", Toast.LENGTH_SHORT).show();
+                runOnUiThread(() -> {
+                    Toast.makeText(AICoachActivity.this, 
+                        "Warning: Could not load full context", Toast.LENGTH_SHORT).show();
+                });
             }
         });
     }
@@ -172,6 +185,98 @@ public class AICoachActivity extends AppCompatActivity {
     private void showLoading(boolean show) {
         loadingProgressBar.setVisibility(show ? View.VISIBLE : View.GONE);
         sendButton.setEnabled(!show);
+    }
+
+    /**
+     * Load conversation history from AICoachService cache
+     */
+    private void loadConversationHistory() {
+        List<com.nmims.fitness.api.AICoachService.ChatMessage> history = 
+            aiCoachService.getConversationHistory();
+        
+        for (com.nmims.fitness.api.AICoachService.ChatMessage msg : history) {
+            boolean isAI = msg.role.equals("assistant");
+            ChatMessage chatMessage = new ChatMessage(msg.content, isAI, System.currentTimeMillis());
+            messages.add(chatMessage);
+        }
+        
+        if (!messages.isEmpty()) {
+            chatAdapter.notifyDataSetChanged();
+            chatRecyclerView.smoothScrollToPosition(messages.size() - 1);
+            Log.d(TAG, "Loaded " + messages.size() + " messages from history");
+        }
+    }
+
+    /**
+     * Clear chat history
+     */
+    private void clearChatHistory() {
+        new androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle("Clear Chat History")
+            .setMessage("Are you sure you want to clear all chat history? This cannot be undone.")
+            .setPositiveButton("Clear", (dialog, which) -> {
+                // Clear from service
+                aiCoachService.clearConversationHistory();
+                
+                // Clear UI
+                messages.clear();
+                chatAdapter.notifyDataSetChanged();
+                
+                // Add welcome message back
+                addWelcomeMessage();
+                
+                Toast.makeText(this, "Chat history cleared", Toast.LENGTH_SHORT).show();
+            })
+            .setNegativeButton("Cancel", null)
+            .show();
+    }
+
+    /**
+     * Check for pending messages that are still being processed
+     */
+    private void checkPendingMessages() {
+        if (aiCoachService.hasPendingMessages()) {
+            int pendingCount = aiCoachService.getPendingMessagesCount();
+            Toast.makeText(this, 
+                pendingCount + " message(s) still being processed in background", 
+                Toast.LENGTH_LONG).show();
+            showLoading(true);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Reload conversation history when returning to activity
+        // This handles cases where responses completed in background
+        refreshConversationHistory();
+    }
+
+    /**
+     * Refresh conversation history from service
+     */
+    private void refreshConversationHistory() {
+        List<com.nmims.fitness.api.AICoachService.ChatMessage> history = 
+            aiCoachService.getConversationHistory();
+        
+        // Only update if there are new messages
+        if (history.size() > messages.size()) {
+            // Clear and reload all messages
+            messages.clear();
+            for (com.nmims.fitness.api.AICoachService.ChatMessage msg : history) {
+                boolean isAI = msg.role.equals("assistant");
+                ChatMessage chatMessage = new ChatMessage(msg.content, isAI, System.currentTimeMillis());
+                messages.add(chatMessage);
+            }
+            chatAdapter.notifyDataSetChanged();
+            chatRecyclerView.smoothScrollToPosition(messages.size() - 1);
+            Log.d(TAG, "Refreshed conversation history with " + messages.size() + " messages");
+        }
+        
+        // Hide loading if no more pending messages
+        if (!aiCoachService.hasPendingMessages()) {
+            showLoading(false);
+        }
     }
 }
 

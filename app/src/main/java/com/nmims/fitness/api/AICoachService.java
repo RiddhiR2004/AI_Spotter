@@ -1,6 +1,7 @@
 package com.nmims.fitness.api;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.nmims.fitness.models.WorkoutPlan;
@@ -38,17 +39,24 @@ public class AICoachService {
     private final Context context;
     private final OkHttpClient client;
     private final SupabaseClient supabaseClient;
+    private final SharedPreferences chatPrefs;
     
     // Increased timeouts for large context processing
     private static final int CONNECT_TIMEOUT = 30; // seconds
     private static final int READ_TIMEOUT = 90; // seconds - Gemini needs time to process large context
     private static final int WRITE_TIMEOUT = 30; // seconds
     
+    // SharedPreferences keys
+    private static final String PREF_NAME = "ai_coach_prefs";
+    private static final String KEY_CHAT_HISTORY = "chat_history";
+    private static final String KEY_PENDING_MESSAGES = "pending_messages";
+    
     // RAG Context - loaded once
     private String systemPrompt = "";
     private String userSurveyData = "";
     private String userWorkoutPlan = "";
     private List<ChatMessage> conversationHistory;
+    private List<String> pendingMessages;
     
     public AICoachService(Context context) {
         this.context = context;
@@ -61,10 +69,18 @@ public class AICoachService {
                 .build();
         
         this.supabaseClient = new SupabaseClient();
+        this.chatPrefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         this.conversationHistory = new ArrayList<>();
+        this.pendingMessages = new ArrayList<>();
         
         // Load system prompt from assets
         loadSystemPrompt();
+        
+        // Load conversation history from cache
+        loadConversationHistory();
+        
+        // Load pending messages
+        loadPendingMessages();
     }
 
     /**
@@ -128,17 +144,38 @@ public class AICoachService {
     }
 
     /**
-     * Get AI coach response with full RAG context
+     * Get AI coach response with full RAG context (async, continues in background)
      */
     public void getCoachResponse(String userMessage, CoachResponseCallback callback) {
         // Add user message to history
         conversationHistory.add(new ChatMessage("user", userMessage));
+        saveConversationHistory();
+        
+        // Add to pending messages for background processing
+        pendingMessages.add(userMessage);
+        savePendingMessages();
         
         // Build the full context
         String fullContext = buildFullContext(userMessage);
         
-        // Call Gemini API
-        callGeminiAPI(fullContext, callback);
+        // Call Gemini API (async)
+        callGeminiAPI(fullContext, new CoachResponseCallback() {
+            @Override
+            public void onSuccess(String response) {
+                // Remove from pending when complete
+                pendingMessages.remove(userMessage);
+                savePendingMessages();
+                
+                // Call original callback
+                callback.onSuccess(response);
+            }
+
+            @Override
+            public void onError(String error) {
+                // Keep in pending on error so user can retry
+                callback.onError(error);
+            }
+        });
     }
 
     /**
@@ -315,6 +352,7 @@ public class AICoachService {
                             
                             // Add AI response to history
                             conversationHistory.add(new ChatMessage("assistant", aiResponse));
+                            saveConversationHistory();
                             
                             callback.onSuccess(aiResponse);
                         } else {
@@ -356,14 +394,122 @@ public class AICoachService {
     }
 
     // Helper class for conversation history
-    private static class ChatMessage {
-        String role;
-        String content;
+    public static class ChatMessage {
+        public String role;
+        public String content;
         
         ChatMessage(String role, String content) {
             this.role = role;
             this.content = content;
         }
+    }
+
+    /**
+     * Save conversation history to SharedPreferences
+     */
+    private void saveConversationHistory() {
+        try {
+            JSONArray historyArray = new JSONArray();
+            for (ChatMessage msg : conversationHistory) {
+                JSONObject msgObj = new JSONObject();
+                msgObj.put("role", msg.role);
+                msgObj.put("content", msg.content);
+                historyArray.put(msgObj);
+            }
+            chatPrefs.edit().putString(KEY_CHAT_HISTORY, historyArray.toString()).apply();
+            Log.d(TAG, "Conversation history saved: " + conversationHistory.size() + " messages");
+        } catch (JSONException e) {
+            Log.e(TAG, "Error saving conversation history", e);
+        }
+    }
+
+    /**
+     * Load conversation history from SharedPreferences
+     */
+    private void loadConversationHistory() {
+        String historyJson = chatPrefs.getString(KEY_CHAT_HISTORY, "[]");
+        try {
+            JSONArray historyArray = new JSONArray(historyJson);
+            conversationHistory.clear();
+            for (int i = 0; i < historyArray.length(); i++) {
+                JSONObject msgObj = historyArray.getJSONObject(i);
+                conversationHistory.add(new ChatMessage(
+                    msgObj.getString("role"),
+                    msgObj.getString("content")
+                ));
+            }
+            Log.d(TAG, "Conversation history loaded: " + conversationHistory.size() + " messages");
+        } catch (JSONException e) {
+            Log.e(TAG, "Error loading conversation history", e);
+            conversationHistory.clear();
+        }
+    }
+
+    /**
+     * Clear conversation history
+     */
+    public void clearConversationHistory() {
+        conversationHistory.clear();
+        pendingMessages.clear();
+        chatPrefs.edit()
+            .remove(KEY_CHAT_HISTORY)
+            .remove(KEY_PENDING_MESSAGES)
+            .apply();
+        Log.d(TAG, "Conversation history cleared");
+    }
+
+    /**
+     * Get conversation history
+     */
+    public List<ChatMessage> getConversationHistory() {
+        return new ArrayList<>(conversationHistory);
+    }
+
+    /**
+     * Save pending messages
+     */
+    private void savePendingMessages() {
+        try {
+            JSONArray pendingArray = new JSONArray();
+            for (String msg : pendingMessages) {
+                pendingArray.put(msg);
+            }
+            chatPrefs.edit().putString(KEY_PENDING_MESSAGES, pendingArray.toString()).apply();
+        } catch (Exception e) {
+            Log.e(TAG, "Error saving pending messages", e);
+        }
+    }
+
+    /**
+     * Load pending messages
+     */
+    private void loadPendingMessages() {
+        String pendingJson = chatPrefs.getString(KEY_PENDING_MESSAGES, "[]");
+        try {
+            JSONArray pendingArray = new JSONArray(pendingJson);
+            pendingMessages.clear();
+            for (int i = 0; i < pendingArray.length(); i++) {
+                pendingMessages.add(pendingArray.getString(i));
+            }
+            Log.d(TAG, "Pending messages loaded: " + pendingMessages.size());
+        } catch (JSONException e) {
+            Log.e(TAG, "Error loading pending messages", e);
+            pendingMessages.clear();
+        }
+    }
+
+    /**
+     * Check if there are pending messages being processed
+     */
+    public boolean hasPendingMessages() {
+        return !pendingMessages.isEmpty();
+    }
+
+    /**
+     * Get pending messages count
+     */
+    public int getPendingMessagesCount() {
+        return pendingMessages.size();
     }
 
     // Callbacks
