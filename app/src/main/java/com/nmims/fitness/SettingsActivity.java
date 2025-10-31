@@ -34,18 +34,18 @@ public class SettingsActivity extends AppCompatActivity {
     private Button buttonEditProfile, buttonLogout;
     
     // Account rows
-    private LinearLayout rowAccountDetails, rowConnectedAccounts;
+    private View rowAccountDetails, rowConnectedAccounts;
     
     // Notification switches
     private SwitchCompat switchWorkoutReminders, switchProgressUpdates, switchPromotionalMessages;
     
     // App settings rows
-    private LinearLayout rowUnits, rowLanguage;
+    private View rowUnits, rowLanguage;
     private TextView textUnitsValue, textLanguageValue;
     private SwitchCompat switchDarkMode;
     
     // Support rows
-    private LinearLayout rowHelpCenter, rowSendFeedback, rowPrivacyPolicy, rowTermsOfService;
+    private View rowHelpCenter, rowSendFeedback, rowPrivacyPolicy, rowTermsOfService;
     
     private String userId;
     private SharedPreferences settings;
@@ -73,28 +73,51 @@ public class SettingsActivity extends AppCompatActivity {
         textUserEmail = findViewById(R.id.text_user_email);
         buttonEditProfile = findViewById(R.id.button_edit_profile);
         
-        // Account section
-        rowAccountDetails = findViewById(R.id.row_account_details);
-        rowConnectedAccounts = findViewById(R.id.row_connected_accounts);
+        // Account section - the include itself is the clickable CardView root
+        rowAccountDetails = findViewById(R.id.settings_account_details);
+        rowConnectedAccounts = findViewById(R.id.settings_connected_accounts);
+        ((TextView) rowAccountDetails.findViewById(R.id.title)).setText("Account Details");
+        ((TextView) rowConnectedAccounts.findViewById(R.id.title)).setText("Connected Accounts");
         
-        // Notification switches - direct IDs
-        switchWorkoutReminders = findViewById(R.id.switch_workout_reminders);
-        switchProgressUpdates = findViewById(R.id.switch_progress_updates);
-        switchPromotionalMessages = findViewById(R.id.switch_promotional_messages);
+        // Notification switches - access through include IDs
+        View workoutRemindersInclude = findViewById(R.id.settings_workout_reminders);
+        View progressUpdatesInclude = findViewById(R.id.settings_progress_updates);
+        View promotionalInclude = findViewById(R.id.settings_promotional);
         
-        // App settings
-        rowUnits = findViewById(R.id.row_units);
-        rowLanguage = findViewById(R.id.row_language);
+        ((TextView) workoutRemindersInclude.findViewById(R.id.title)).setText("Workout Reminders");
+        ((TextView) progressUpdatesInclude.findViewById(R.id.title)).setText("Progress Updates");
+        ((TextView) promotionalInclude.findViewById(R.id.title)).setText("Promotional Messages");
         
-        textUnitsValue = findViewById(R.id.text_units_value);
-        textLanguageValue = findViewById(R.id.text_language_value);
-        switchDarkMode = findViewById(R.id.switch_dark_mode);
+        switchWorkoutReminders = workoutRemindersInclude.findViewById(R.id.switch_compat);
+        switchProgressUpdates = progressUpdatesInclude.findViewById(R.id.switch_compat);
+        switchPromotionalMessages = promotionalInclude.findViewById(R.id.switch_compat);
         
-        // Support section
-        rowHelpCenter = findViewById(R.id.row_help_center);
-        rowSendFeedback = findViewById(R.id.row_send_feedback);
-        rowPrivacyPolicy = findViewById(R.id.row_privacy_policy);
-        rowTermsOfService = findViewById(R.id.row_terms_of_service);
+        // App settings - access through include IDs
+        View unitsInclude = findViewById(R.id.settings_units);
+        View languageInclude = findViewById(R.id.settings_language);
+        View darkModeInclude = findViewById(R.id.settings_dark_mode);
+        
+        ((TextView) unitsInclude.findViewById(R.id.title)).setText("Units");
+        ((TextView) languageInclude.findViewById(R.id.title)).setText("Language");
+        ((TextView) darkModeInclude.findViewById(R.id.title)).setText("Dark Mode");
+        
+        rowUnits = unitsInclude;
+        rowLanguage = languageInclude;
+        
+        textUnitsValue = unitsInclude.findViewById(R.id.value);
+        textLanguageValue = languageInclude.findViewById(R.id.value);
+        switchDarkMode = darkModeInclude.findViewById(R.id.switch_compat);
+        
+        // Support section - access through include IDs
+        rowHelpCenter = findViewById(R.id.settings_help);
+        rowSendFeedback = findViewById(R.id.settings_feedback);
+        rowPrivacyPolicy = findViewById(R.id.settings_privacy);
+        rowTermsOfService = findViewById(R.id.settings_terms);
+        
+        ((TextView) rowHelpCenter.findViewById(R.id.title)).setText("Help Center");
+        ((TextView) rowSendFeedback.findViewById(R.id.title)).setText("Send Feedback");
+        ((TextView) rowPrivacyPolicy.findViewById(R.id.title)).setText("Privacy Policy");
+        ((TextView) rowTermsOfService.findViewById(R.id.title)).setText("Terms of Service");
         
         // Logout
         buttonLogout = findViewById(R.id.button_logout);
@@ -150,7 +173,7 @@ public class SettingsActivity extends AppCompatActivity {
         // Load app preferences
         String units = settings.getString("units", "kg");
         String language = settings.getString("language", "English");
-        boolean darkMode = settings.getBoolean("dark_mode", true);
+        boolean darkMode = settings.getBoolean("dark_mode", false);
         
         textUnitsValue.setText(units);
         textLanguageValue.setText(language);

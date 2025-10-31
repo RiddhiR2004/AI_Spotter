@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/deep_purple_bg"
+    android:background="@color/background_light"
     android:padding="16dp">
 
     <!-- Back Button -->
@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:cardBackgroundColor="@color/card_background_dark"
+                app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp">
 
@@ -82,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_bold"
                         android:text="Push-ups"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/black"
                         android:textSize="24sp" />
 
                     <!-- Exercise Details (Sets, Reps, Duration) -->
@@ -93,7 +93,7 @@
                         android:layout_marginTop="8dp"
                         android:fontFamily="@font/poppins"
                         android:text="3 sets  •  12 reps  •  Rest: 60 seconds"
-                        android:textColor="@color/accent_purple"
+                        android:textColor="@color/primary"
                         android:textSize="16sp" />
 
                     <!-- Target Muscles -->
@@ -122,7 +122,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_bold"
                         android:text="Instructions"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                     <!-- Instructions Text -->
@@ -144,10 +144,10 @@
                         android:layout_height="56dp"
                         android:layout_marginTop="20dp"
                         android:background="@drawable/button_primary_background"
-                        android:fontFamily="@font/poppins_bold"
+                        android:fontFamily="@font/lexend_bold"
                         android:text="Mark Complete"
                         android:textAllCaps="false"
-                        android:textColor="@android:color/white"
+                        android:textColor="@color/black"
                         android:textSize="16sp" />
 
                 </LinearLayout>
@@ -203,10 +203,10 @@
             android:layout_height="48dp"
             android:layout_marginTop="12dp"
             android:background="@drawable/button_secondary_background"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/lexend_bold"
             android:text="Start Timer"
             android:textAllCaps="false"
-            android:textColor="@android:color/white"
+            android:textColor="@color/black"
             android:textSize="14sp" />
 
     </LinearLayout>
@@ -228,11 +228,11 @@
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:background="@drawable/button_secondary_background"
-            android:fontFamily="@font/poppins_bold"
+            android:fontFamily="@font/lexend_bold"
             android:text="Previous"
             android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/button_next"
@@ -240,12 +240,12 @@
             android:layout_height="56dp"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:background="@drawable/button_start_background"
-            android:fontFamily="@font/poppins_bold"
+            android:background="@drawable/button_secondary_background"
+            android:fontFamily="@font/lexend_bold"
             android:text="Next Exercise"
             android:textAllCaps="false"
-            android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
     </LinearLayout>
 

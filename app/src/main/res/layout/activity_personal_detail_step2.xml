@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/deep_purple_bg"
+    android:background="@color/background_light"
     android:padding="24dp"
     tools:context=".PersonalDetailStep2Activity">
 
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins"
         android:text="Step 2 of 4"
-        android:textColor="@android:color/white"
+        android:textColor="@color/text_dark_secondary"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,7 +39,7 @@
         android:layout_marginTop="32dp"
         android:fontFamily="@font/poppins_bold"
         android:text="Your Fitness Habits"
-        android:textColor="@android:color/white"
+        android:textColor="@color/text_gray_900"
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +94,7 @@
             android:paddingTop="14dp"
             android:paddingBottom="14dp"
             android:text="3-4 times/week"
-            android:textColor="@android:color/white"
+            android:textColor="@color/text_gray_900"
             android:textColorHint="@color/text_light_grey"
             android:textSize="16sp" />
 
@@ -118,7 +118,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
         android:text="60 mins"
-        android:textColor="@android:color/white"
+        android:textColor="@color/text_gray_900"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView_timeLabel"
         app:layout_constraintEnd_toEndOf="parent"
@@ -136,9 +136,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_timeLabel"
-        app:thumbColor="@color/accent_purple"
-        app:trackColorActive="@color/accent_purple"
-        app:trackColorInactive="@color/card_background_dark"
+        app:thumbColor="@color/primary"
+        app:trackColorActive="@color/primary"
+        app:trackColorInactive="@color/gray_200"
         app:labelBehavior="gone" />
 
     <TextView
@@ -180,11 +180,11 @@
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
-        android:background="@drawable/button_background_purple"
-        android:fontFamily="@font/poppins_bold"
+        android:background="@drawable/button_primary_glow"
+        android:fontFamily="@font/lexend_bold"
         android:text="Next"
         android:textAllCaps="false"
-        android:textColor="@android:color/white"
+        android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

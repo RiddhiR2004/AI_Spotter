@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/deep_purple_bg">
+    android:background="@color/background_light">
 
     <!-- Header -->
     <LinearLayout
         android:id="@+id/layout_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/card_background_dark"
-        android:elevation="4dp"
+        android:background="@color/card_background_light"
+        android:elevation="2dp"
         android:orientation="horizontal"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +25,7 @@
             android:layout_gravity="center_vertical"
             android:contentDescription="Back"
             android:src="@drawable/ic_arrow_back"
-            app:tint="@android:color/white" />
+            app:tint="@color/text_gray_900" />
 
         <TextView
             android:layout_width="0dp"
@@ -35,15 +35,26 @@
             android:layout_weight="1"
             android:fontFamily="@font/poppins_bold"
             android:text="AI Fitness Coach"
-            android:textColor="@android:color/white"
+            android:textColor="@color/text_gray_900"
             android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/button_clear_history"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Clear Chat History"
+            android:src="@drawable/ic_delete"
+            app:tint="@color/text_gray_600" />
 
         <ImageView
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_bot"
-            app:tint="@color/accent_purple" />
+            android:src="@drawable/ic_sparkle"
+            app:tint="@color/primary" />
 
     </LinearLayout>
 
@@ -74,7 +85,7 @@
         android:id="@+id/layout_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/card_background_dark"
+        android:background="@color/card_background_light"
         android:elevation="8dp"
         android:orientation="horizontal"
         android:padding="12dp"
@@ -97,8 +108,8 @@
             android:paddingTop="12dp"
             android:paddingEnd="16dp"
             android:paddingBottom="12dp"
-            android:textColor="@android:color/white"
-            android:textColorHint="@color/text_light_grey"
+            android:textColor="@color/text_gray_900"
+            android:textColorHint="@color/gray_500"
             android:textSize="16sp" />
 
         <ImageButton

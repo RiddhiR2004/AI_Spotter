@@ -1,0 +1,16 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="?attr/colorControlNormal">
+
+    <!--
+    This pathData creates a trophy shape.
+    The 'tint' attribute allows the color to be easily set in your layout XML.
+    -->
+    <path
+        android:fillColor="@android:color/white"
+        android:pathData="M20.5,10c-0.28,0 -0.5,0.22 -0.5,0.5v3.5h-1.5c-0.28,0 -0.5,0.22 -0.5,0.5s0.22,0.5 0.5,0.5h2v-4.5c0,-0.28 -0.22,-0.5 -0.5,-0.5zM12,2c-2.76,0 -5,2.24 -5,5v4.5H6c-0.55,0 -1,0.45 -1,1v4h2v-3h1v3h8v-3h1v3h2v-4c0,-0.55 -0.45,-1 -1,-1h-1.5V7c0,-2.76 -2.24,-5 -5,-5zm-3,5c0,-1.65 1.35,-3 3,-3s3,1.35 3,3v3.13c-0.71,0.22 -1.38,0.56 -2,1V7h-2v3.25c-0.08,0 -0.17,-0.01 -0.25,-0.01C10.03,10.24 9.38,10.1 8.75,9.88L9,7zm-5.5,4.5h1.5v3.5h-2c-0.28,0 -0.5,-0.22 -0.5,-0.5s0.22,-0.5 0.5,-0.5h0.5V14c0,-0.28 0.22,-0.5 0.5,-0.5zM18,20H6v-1h12v1z" />
+
+</vector>

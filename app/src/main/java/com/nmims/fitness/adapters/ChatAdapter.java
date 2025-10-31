@@ -78,13 +78,17 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) messageContainer.getLayoutParams();
             
             if (message.isAI()) {
-                // AI message - left aligned
+                // AI message - left aligned, white text on dark background
                 params.gravity = Gravity.START;
                 messageContainer.setBackgroundResource(R.drawable.chat_bubble_ai);
+                messageTextView.setTextColor(itemView.getContext().getResources().getColor(R.color.white));
+                timeTextView.setTextColor(itemView.getContext().getResources().getColor(R.color.gray_400));
             } else {
-                // User message - right aligned
+                // User message - right aligned, black text on green background
                 params.gravity = Gravity.END;
                 messageContainer.setBackgroundResource(R.drawable.chat_bubble_user);
+                messageTextView.setTextColor(itemView.getContext().getResources().getColor(R.color.black));
+                timeTextView.setTextColor(itemView.getContext().getResources().getColor(R.color.green_900));
             }
             
             messageContainer.setLayoutParams(params);

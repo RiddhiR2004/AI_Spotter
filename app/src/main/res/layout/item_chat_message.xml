@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:text="Message text"
-            android:textColor="@android:color/white"
+            android:textColor="@color/white"
             android:textSize="15sp" />
 
         <TextView

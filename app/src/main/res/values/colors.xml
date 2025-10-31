@@ -1,21 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="deep_purple_bg">#1A0033</color>
-    <color name="card_background_dark">#2B004D</color>
-    <color name="text_light_grey">#B0B0B0</color>
-    <color name="link_purple">#A07EFD</color>
-    <color name="accent_cyan">#00BCD4</color>
-    <color name="button_gradient_start">#A07EFD</color>
-    <color name="button_gradient_end">#EC407A</color>
-    <color name="card_background">#332B4C</color>
-    <color name="accent_purple">#7F52FF</color>
-    <color name="button_gradient_purple">#7F52FF</color>
+    <!-- Primary Colors - New Green Theme -->
+    <color name="primary">#32CD32</color>
+    <color name="primary_variant">#39FF14</color>
+    <color name="primary_light">#e0ffdb</color>
+    <color name="primary_dark">#16a34a</color>
+    <color name="primary_text">#16a34a</color>
+    
+    <!-- Background Colors -->
+    <color name="background_light">#F3F4F6</color>
+    <color name="background_dark">#101c22</color>
+    <color name="background_dark_elevated">#1a2527</color>
+    
+    <!-- Card Colors -->
+    <color name="card_background_dark">#1A1D1E</color>
+    <color name="card_background">#1A1D1E</color>
+    <color name="card_light">#242729</color>
+    <color name="card_background_light">#ffffff</color>
+    
+    <!-- Text Colors -->
+    <color name="text_dark_primary">#ffffff</color>
+    <color name="text_dark_secondary">#a0a0a0</color>
+    <color name="text_light_grey">#a0a0a0</color>
+    <color name="text_gray_900">#111827</color>
+    <color name="text_gray_800">#1f2937</color>
+    <color name="text_gray_700">#374151</color>
+    <color name="text_gray_600">#4b5563</color>
+    <color name="text_gray_500">#6b7280</color>
+    <color name="text_gray_400">#9ca3af</color>
+    <color name="text_gray_300">#d1d5db</color>
+    
+    <!-- Border Colors -->
+    <color name="border_light">#3a3a3a</color>
+    <color name="border_gray_200">#e5e7eb</color>
+    <color name="border_gray_700">#374151</color>
+    <color name="border_gray_800">#1f2937</color>
+    
+    <!-- Accent Colors (for backward compatibility) -->
+    <color name="accent_cyan">#06f906</color>
+    
+    <!-- Status Colors -->
     <color name="red_negative">#FF5252</color>
-    <color name="green_positive">#69F0AE</color>
+    <color name="green_positive">#32CD32</color>
+    <color name="vibrant_green">#32CD32</color>
+    <color name="green_primary_text">#16a34a</color>
+    <color name="green_primary_text_dark">#4ade80</color>
     <color name="accent_blue">#68A7EA</color>
-    <color name="vibrant_green">#69F0AE</color>
-    <color name="chip_text_color">#B0AEC6</color>
-    <color name="chip_background_color">#2E2140</color>
-
-
+    
+    <!-- Component Colors -->
+    <color name="chip_text_color">#ffffff</color>
+    <color name="chip_background_color">#2d2d2d</color>
+    
+    <!-- Common Colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    
+    <!-- Gray Scale -->
+    <color name="gray_50">#f9fafb</color>
+    <color name="gray_100">#f3f4f6</color>
+    <color name="gray_200">#e5e7eb</color>
+    <color name="gray_300">#d1d5db</color>
+    <color name="gray_400">#9ca3af</color>
+    <color name="gray_500">#6b7280</color>
+    <color name="gray_600">#4b5563</color>
+    <color name="gray_700">#374151</color>
+    <color name="gray_800">#1f2937</color>
+    <color name="gray_900">#111827</color>
+    
+    <!-- Green Scale -->
+    <color name="green_50">#f0fdf4</color>
+    <color name="green_100">#dcfce7</color>
+    <color name="green_200">#bbf7d0</color>
+    <color name="green_300">#86efac</color>
+    <color name="green_400">#4ade80</color>
+    <color name="green_500">#22c55e</color>
+    <color name="green_600">#16a34a</color>
+    <color name="green_700">#15803d</color>
+    <color name="green_800">#166534</color>
+    <color name="green_900">#14532d</color>
+    <color name="green_950">#052e16</color>
 </resources>

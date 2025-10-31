@@ -4,41 +4,145 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/deep_purple_bg"
-    android:padding="24dp"
+    android:background="@color/background_light"
     tools:context=".WorkoutPlanActivity">
 
     <!-- Header Section -->
-    <ImageView
-        android:id="@+id/imageView_back"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:src="@drawable/ic_arrow_back"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@android:color/white" />
-
-    <TextView
-        android:id="@+id/textView_workoutTitle"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Full Body Strength - Day 1"
-        android:textColor="@android:color/white"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView_back"
+        android:background="@color/background_light"
+        android:elevation="4dp"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="12dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView_back"
-        app:layout_constraintTop_toTopOf="@+id/imageView_back" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/imageView_back"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Back"
+            android:padding="12dp"
+            android:src="@drawable/ic_arrow_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/text_gray_800" />
+
+        <TextView
+            android:id="@+id/textView_workoutTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/lexend_bold"
+            android:gravity="center"
+            android:text="Full Body Strength - Day 1"
+            android:textColor="@color/text_gray_900"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView_back"
+            app:layout_constraintEnd_toStartOf="@+id/spacer_end"
+            app:layout_constraintStart_toEndOf="@+id/imageView_back"
+            app:layout_constraintTop_toTopOf="@+id/imageView_back" />
+
+        <View
+            android:id="@+id/spacer_end"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- ScrollView for Exercise List -->
+    <ScrollView
+        android:id="@+id/scroll_exercises"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toTopOf="@+id/finish_button_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header_container">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp">
+
+            <!-- Day Selector Tabs -->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_days"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@android:color/transparent"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/primary"
+                app:tabTextColor="@color/text_gray_600"
+                app:tabIndicatorColor="@color/primary" />
+
+            <!-- RecyclerView for Exercise List (now wrapped in LinearLayout) -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_exercises"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/item_exercise" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Finish Workout Button -->
+    <LinearLayout
+        android:id="@+id/finish_button_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/background_light"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/layout_bottom_controls"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/button_finish"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/button_primary_glow"
+            android:fontFamily="@font/lexend_bold"
+            android:text="Finish Workout"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+    </LinearLayout>
 
     <!-- Bottom Controls (Timer and Buttons) -->
     <LinearLayout
         android:id="@+id/layout_bottom_controls"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@color/background_light"
+        android:elevation="8dp"
         android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -48,87 +152,124 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="16dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/gray_200"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+
+                <TextView
+                    android:id="@+id/timer_hours"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/lexend_bold"
+                    android:gravity="center"
+                    android:text="00"
+                    android:textColor="@color/text_gray_900"
+                    android:textSize="36sp" />
+
+            </androidx.cardview.widget.CardView>
 
             <TextView
-                style="@style/TimerTextView"
-                android:text="00" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/lexend_bold"
+                android:text=":"
+                android:textColor="@color/gray_500"
+                android:textSize="36sp" />
 
-            <TextView style="@style/TimerColonTextView" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/gray_200"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+
+                <TextView
+                    android:id="@+id/timer_minutes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/lexend_bold"
+                    android:gravity="center"
+                    android:text="00"
+                    android:textColor="@color/text_gray_900"
+                    android:textSize="36sp" />
+
+            </androidx.cardview.widget.CardView>
 
             <TextView
-                style="@style/TimerTextView"
-                android:text="00" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/lexend_bold"
+                android:text=":"
+                android:textColor="@color/gray_500"
+                android:textSize="36sp" />
 
-            <TextView style="@style/TimerColonTextView" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="64dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/gray_200"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
 
-            <TextView
-                style="@style/TimerTextView"
-                android:text="00" />
+                <TextView
+                    android:id="@+id/timer_seconds"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/lexend_bold"
+                    android:gravity="center"
+                    android:text="00"
+                    android:textColor="@color/text_gray_900"
+                    android:textSize="36sp" />
+
+            </androidx.cardview.widget.CardView>
+
         </LinearLayout>
 
         <!-- Buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/button_start"
                 android:layout_width="0dp"
-                android:layout_height="60dp"
+                android:layout_height="56dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="2"
-                android:background="@drawable/button_start_background"
-                android:fontFamily="@font/poppins_bold"
+                android:background="@drawable/button_primary_glow"
+                android:fontFamily="@font/lexend_bold"
                 android:text="Start"
                 android:textAllCaps="false"
-                android:textColor="@android:color/white"
+                android:textColor="@color/black"
                 android:textSize="18sp" />
 
             <Button
                 android:id="@+id/button_reset"
                 android:layout_width="0dp"
-                android:layout_height="60dp"
+                android:layout_height="56dp"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                android:background="@drawable/button_reset_background"
-                android:fontFamily="@font/poppins_bold"
+                android:background="@drawable/button_secondary_light"
+                android:fontFamily="@font/lexend_bold"
                 android:text="Reset"
                 android:textAllCaps="false"
-                android:textColor="@color/text_light_grey"
+                android:textColor="@color/text_gray_800"
                 android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>
-
-
-    <!-- Day Selector Tabs -->
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_days"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@android:color/transparent"
-        app:tabMode="scrollable"
-        app:tabTextColor="@android:color/white"
-        app:tabSelectedTextColor="@color/vibrant_green"
-        app:tabIndicatorColor="@color/vibrant_green"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_workoutTitle" />
-
-    <!-- RecyclerView for Exercise List -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_exercises"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/layout_bottom_controls"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tab_days" />
 
     <!-- Progress Indicator -->
     <ProgressBar
@@ -140,6 +281,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

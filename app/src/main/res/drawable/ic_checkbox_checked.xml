@@ -1,12 +1,28 @@
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="24dp"
-    android:height="24dp"
-    android:viewportWidth="24"
-    android:viewportHeight="24">
-    <path
-        android:fillColor="#7F52FF"
-        android:pathData="M12,2A10,10 0,1 0,22 12,10 10,0 0,0 12,2z" />
-    <path
-        android:fillColor="@android:color/white"
-        android:pathData="M9.29,16.29L5.7,12.7a1,1 0,0 1,1.41 -1.41L10,14.17l6.88,-6.88a1,1 0,0 1,1.41 1.41L10.7,16.29a1,1 0,0 1,-1.41 0z" />
-</vector>
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background box -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="6dp" />
+            <solid android:color="#4CAF50" />
+            <stroke
+                android:width="2dp"
+                android:color="#4CAF50" />
+        </shape>
+    </item>
+    <!-- Checkmark icon -->
+    <item
+        android:width="18dp"
+        android:height="18dp"
+        android:gravity="center">
+        <vector
+            android:width="24dp"
+            android:height="24dp"
+            android:viewportWidth="24"
+            android:viewportHeight="24">
+            <path
+                android:fillColor="@android:color/white"
+                android:pathData="M9,16.17L4.83,12l-1.42,1.41L9,19 21,7l-1.41,-1.41z" />
+        </vector>
+    </item>
+</layer-list>

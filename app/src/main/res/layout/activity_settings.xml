@@ -4,45 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/deep_purple_bg"
+    android:background="@color/background_light"
     tools:context=".SettingsActivity">
 
+    <!-- Header -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/app_bar"
         android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        android:paddingStart="24dp"
-        android:paddingEnd="24dp"
+        android:layout_height="wrap_content"
+        android:background="@color/background_light"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/icon_back"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Back"
+            android:padding="12dp"
             android:src="@drawable/ic_arrow_back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@android:color/white"
-            android:contentDescription="Back" />
+            app:tint="@color/text_gray_800" />
 
         <TextView
             android:id="@+id/text_settings_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_bold"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/lexend_bold"
+            android:gravity="center"
             android:text="Settings"
-            android:textColor="@android:color/white"
-            android:textSize="20sp"
+            android:textColor="@color/text_gray_900"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/spacer_end"
+            app:layout_constraintStart_toEndOf="@+id/icon_back"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/spacer_end"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- ScrollView with Settings Content -->
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -55,445 +72,223 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingStart="24dp"
-            android:paddingEnd="24dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:paddingBottom="24dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <!-- Profile Card -->
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/card_background_light"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
 
-                <ImageView
-                    android:id="@+id/profile_image"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:src="@drawable/ic_profile_placeholder"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="Profile Avatar" />
-
-                <TextView
-                    android:id="@+id/text_user_name"
-                    android:layout_width="0dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:fontFamily="@font/poppins_bold"
-                    android:text="Alex Morgan"
-                    android:textColor="@android:color/white"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toStartOf="@+id/button_edit_profile"
-                    app:layout_constraintStart_toEndOf="@+id/profile_image"
-                    app:layout_constraintTop_toTopOf="@+id/profile_image" />
+                    android:padding="16dp">
 
-                <TextView
-                    android:id="@+id/text_user_email"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:text="alex.morgan@email.com"
-                    android:textColor="@color/text_light_grey"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/profile_image"
-                    app:layout_constraintEnd_toStartOf="@+id/button_edit_profile"
-                    app:layout_constraintStart_toStartOf="@+id/text_user_name"
-                    app:layout_constraintTop_toBottomOf="@+id/text_user_name" />
+                    <ImageView
+                        android:id="@+id/profile_image"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:background="@drawable/circle_background"
+                        android:contentDescription="Profile Avatar"
+                        android:src="@drawable/ic_profile_placeholder"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <Button
-                    android:id="@+id/button_edit_profile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:background="@drawable/button_background_purple"
-                    android:fontFamily="@font/poppins_bold"
-                    android:minWidth="0dp"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:text="Edit Profile"
-                    android:textAllCaps="false"
-                    android:textColor="@android:color/white"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/text_user_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:fontFamily="@font/lexend_bold"
+                        android:text="Alex Morgan"
+                        android:textColor="@color/text_gray_900"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toStartOf="@+id/button_edit_profile"
+                        app:layout_constraintStart_toEndOf="@+id/profile_image"
+                        app:layout_constraintTop_toTopOf="@+id/profile_image" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/text_user_email"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lexend"
+                        android:text="alex.morgan@email.com"
+                        android:textColor="@color/text_gray_600"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+                        app:layout_constraintEnd_toStartOf="@+id/button_edit_profile"
+                        app:layout_constraintStart_toStartOf="@+id/text_user_name"
+                        app:layout_constraintTop_toBottomOf="@+id/text_user_name" />
 
+                    <Button
+                        android:id="@+id/button_edit_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:background="@drawable/button_edit_profile"
+                        android:fontFamily="@font/lexend_bold"
+                        android:minWidth="0dp"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:text="Edit Profile"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Account Section -->
             <TextView
-                style="@style/SettingsSectionHeader"
-                android:text="ACCOUNT" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/lexend_semibold"
+                android:paddingStart="4dp"
+                android:text="ACCOUNT"
+                android:textColor="@color/text_gray_600"
+                android:textSize="12sp"
+                android:letterSpacing="0.08" />
 
-            <!-- Account Details Row -->
-            <LinearLayout
-                android:id="@+id/row_account_details"
+            <include
+                android:id="@+id/settings_account_details"
+                layout="@layout/item_settings_row"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true">
-                
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Account Details"
-                    android:fontFamily="@font/poppins"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
-                    
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_arrow_chevron_right"
-                    app:tint="@color/text_light_grey"
-                    android:contentDescription="Navigate" />
-            </LinearLayout>
+                android:layout_height="wrap_content" />
 
-            <!-- Connected Accounts Row -->
-            <LinearLayout
-                android:id="@+id/row_connected_accounts"
+            <include
+                android:id="@+id/settings_connected_accounts"
+                layout="@layout/item_settings_row"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true">
-                
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Connected Accounts"
-                    android:fontFamily="@font/poppins"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
-                    
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_arrow_chevron_right"
-                    app:tint="@color/text_light_grey"
-                    android:contentDescription="Navigate" />
-            </LinearLayout>
+                android:layout_height="wrap_content" />
 
+            <!-- Notifications Section -->
             <TextView
-                style="@style/SettingsSectionHeader"
-                android:text="NOTIFICATIONS" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/lexend_semibold"
+                android:paddingStart="4dp"
+                android:text="NOTIFICATIONS"
+                android:textColor="@color/text_gray_600"
+                android:textSize="12sp"
+                android:letterSpacing="0.08" />
 
-            <!-- Workout Reminders Switch -->
-            <LinearLayout
-                android:id="@+id/row_workout_reminders"
+            <include
+                android:id="@+id/settings_workout_reminders"
+                layout="@layout/item_settings_switch_row"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="@color/deep_purple_bg">
-                
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Workout Reminders"
-                    android:fontFamily="@font/poppins"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
-                    
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/switch_workout_reminders"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/SettingsSwitch" />
-            </LinearLayout>
+                android:layout_height="wrap_content" />
 
-            <!-- Progress Updates Switch -->
-            <LinearLayout
-                android:id="@+id/row_progress_updates"
+            <include
+                android:id="@+id/settings_progress_updates"
+                layout="@layout/item_settings_switch_row"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="@color/deep_purple_bg">
-                
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Progress Updates"
-                    android:fontFamily="@font/poppins"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
-                    
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/switch_progress_updates"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/SettingsSwitch" />
-            </LinearLayout>
+                android:layout_height="wrap_content" />
 
-            <!-- Promotional Messages Switch -->
-            <LinearLayout
-                android:id="@+id/row_promotional_messages"
+            <include
+                android:id="@+id/settings_promotional"
+                layout="@layout/item_settings_switch_row"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="@color/deep_purple_bg">
-                
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Promotional Messages"
-                    android:fontFamily="@font/poppins"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
-                    
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/switch_promotional_messages"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/SettingsSwitch" />
-            </LinearLayout>
+                android:layout_height="wrap_content" />
 
+            <!-- App Section -->
             <TextView
-                style="@style/SettingsSectionHeader"
-                android:text="APP" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/lexend_semibold"
+                android:paddingStart="4dp"
+                android:text="APP"
+                android:textColor="@color/text_gray_600"
+                android:textSize="12sp"
+                android:letterSpacing="0.08" />
 
-            <!-- Units Row -->
-            <LinearLayout
-                android:id="@+id/row_units"
+            <include
+                android:id="@+id/settings_units"
+                layout="@layout/item_settings_value_row"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true">
-                
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Units"
-                    android:fontFamily="@font/poppins"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
-                    
-                <TextView
-                    android:id="@+id/text_units_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:text="kg"
-                    android:fontFamily="@font/poppins"
-                    android:textColor="@color/text_light_grey"
-                    android:textSize="16sp" />
-                    
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_arrow_chevron_right"
-                    app:tint="@color/text_light_grey"
-                    android:contentDescription="Navigate" />
-            </LinearLayout>
+                android:layout_height="wrap_content" />
 
-            <!-- Language Row -->
-            <LinearLayout
-                android:id="@+id/row_language"
+            <include
+                android:id="@+id/settings_language"
+                layout="@layout/item_settings_value_row"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true">
-                
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Language"
-                    android:fontFamily="@font/poppins"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
-                    
-                <TextView
-                    android:id="@+id/text_language_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:text="English"
-                    android:fontFamily="@font/poppins"
-                    android:textColor="@color/text_light_grey"
-                    android:textSize="16sp" />
-                    
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_arrow_chevron_right"
-                    app:tint="@color/text_light_grey"
-                    android:contentDescription="Navigate" />
-            </LinearLayout>
+                android:layout_height="wrap_content" />
 
-            <!-- Dark Mode Switch -->
-            <LinearLayout
-                android:id="@+id/row_dark_mode"
+            <include
+                android:id="@+id/settings_dark_mode"
+                layout="@layout/item_settings_switch_row"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="@color/deep_purple_bg">
-                
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Dark Mode"
-                    android:fontFamily="@font/poppins"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
-                    
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/switch_dark_mode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:theme="@style/SettingsSwitch" />
-            </LinearLayout>
+                android:layout_height="wrap_content" />
 
+            <!-- Support & Legal Section -->
             <TextView
-                style="@style/SettingsSectionHeader"
-                android:text="SUPPORT and LEGAL" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/lexend_semibold"
+                android:paddingStart="4dp"
+                android:text="SUPPORT &amp; LEGAL"
+                android:textColor="@color/text_gray_600"
+                android:textSize="12sp"
+                android:letterSpacing="0.08" />
 
-            <!-- Help Center Row -->
-            <LinearLayout
-                android:id="@+id/row_help_center"
+            <include
+                android:id="@+id/settings_help"
+                layout="@layout/item_settings_row"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true">
-                
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Help Center"
-                    android:fontFamily="@font/poppins"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
-                    
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_arrow_chevron_right"
-                    app:tint="@color/text_light_grey"
-                    android:contentDescription="Navigate" />
-            </LinearLayout>
+                android:layout_height="wrap_content" />
 
-            <!-- Send Feedback Row -->
-            <LinearLayout
-                android:id="@+id/row_send_feedback"
+            <include
+                android:id="@+id/settings_feedback"
+                layout="@layout/item_settings_row"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true">
-                
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Send Feedback"
-                    android:fontFamily="@font/poppins"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
-                    
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_arrow_chevron_right"
-                    app:tint="@color/text_light_grey"
-                    android:contentDescription="Navigate" />
-            </LinearLayout>
+                android:layout_height="wrap_content" />
 
-            <!-- Privacy Policy Row -->
-            <LinearLayout
-                android:id="@+id/row_privacy_policy"
+            <include
+                android:id="@+id/settings_privacy"
+                layout="@layout/item_settings_row"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true">
-                
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Privacy Policy"
-                    android:fontFamily="@font/poppins"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
-                    
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_arrow_chevron_right"
-                    app:tint="@color/text_light_grey"
-                    android:contentDescription="Navigate" />
-            </LinearLayout>
+                android:layout_height="wrap_content" />
 
-            <!-- Terms of Service Row -->
-            <LinearLayout
-                android:id="@+id/row_terms_of_service"
+            <include
+                android:id="@+id/settings_terms"
+                layout="@layout/item_settings_row"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true">
-                
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Terms of Service"
-                    android:fontFamily="@font/poppins"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
-                    
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_arrow_chevron_right"
-                    app:tint="@color/text_light_grey"
-                    android:contentDescription="Navigate" />
-            </LinearLayout>
+                android:layout_height="wrap_content" />
 
+            <!-- Logout Button -->
             <Button
                 android:id="@+id/button_logout"
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
+                android:layout_height="48dp"
                 android:layout_marginTop="24dp"
-                android:background="@drawable/button_logout_background"
-                android:drawableStart="@drawable/ic_settings_logout"
-                android:fontFamily="@font/poppins_bold"
-                android:gravity="center_vertical|start"
-                android:paddingStart="24dp"
+                android:background="@drawable/button_logout_red"
+                android:drawableStart="@drawable/ic_logout"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/lexend_medium"
+                android:gravity="center"
                 android:text="Logout"
                 android:textAllCaps="false"
-                android:textColor="@color/red_negative"
+                android:textColor="#EF4444"
                 android:textSize="16sp" />
 
         </LinearLayout>
+
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

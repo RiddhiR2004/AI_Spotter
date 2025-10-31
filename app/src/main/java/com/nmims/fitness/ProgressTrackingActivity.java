@@ -34,7 +34,7 @@ public class ProgressTrackingActivity extends AppCompatActivity {
     
     private TextView overallProgressTextView;
     private TextView weeklyBreakdownTextView;
-    private TextView statsTextView;
+
     
     private String userId;
     private WorkoutPlan currentWorkoutPlan;
@@ -53,7 +53,7 @@ public class ProgressTrackingActivity extends AppCompatActivity {
     private void initViews() {
         overallProgressTextView = findViewById(R.id.textView_overall_progress);
         weeklyBreakdownTextView = findViewById(R.id.textView_weekly_breakdown);
-        statsTextView = findViewById(R.id.textView_stats);
+
         
         findViewById(R.id.imageView_back).setOnClickListener(v -> finish());
     }
@@ -168,7 +168,7 @@ public class ProgressTrackingActivity extends AppCompatActivity {
         overallProgressTextView.setText(overallText);
 
         // Display weekly breakdown
-        StringBuilder weeklyText = new StringBuilder("📅 Weekly Breakdown\n\n");
+        StringBuilder weeklyText = new StringBuilder("\n");
         
         for (WorkoutDay day : currentWorkoutPlan.getWorkoutDays()) {
             int[] progress = dayProgress.get(day.getDay());
@@ -204,8 +204,6 @@ public class ProgressTrackingActivity extends AppCompatActivity {
                 currentWorkoutPlan.getGoal(),
                 currentWorkoutPlan.getDurationWeeks(),
                 getMotivationalMessage(overallPercentage));
-        
-        statsTextView.setText(statsText);
     }
 
     private String getMotivationalMessage(float progress) {

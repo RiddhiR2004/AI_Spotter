@@ -1,64 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/exercise_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="2dp"
-    app:strokeWidth="1dp"
-    app:strokeColor="?attr/colorOutline">
+    android:layout_marginBottom="12dp"
+    android:clickable="false"
+    android:focusable="false"
+    app:cardBackgroundColor="@color/card_background_light"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/border_light"
+    app:strokeWidth="1dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:gravity="center_vertical">
 
+        <!-- Checkbox -->
         <CheckBox
             android:id="@+id/exercise_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="12dp" />
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="16dp"
+            android:minWidth="32dp"
+            android:minHeight="32dp"
+            android:button="@drawable/checkbox_custom_green"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless" />
 
+        <!-- Exercise Info -->
         <LinearLayout
+            android:id="@+id/exercise_content"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
 
             <TextView
                 android:id="@+id/exercise_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/lexend_semibold"
                 android:text="Push-ups"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="?attr/colorOnSurface" />
+                android:textColor="@color/text_gray_900"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/exercise_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="3 sets × 12 reps • Rest: 60 seconds"
-                android:textSize="14sp"
-                android:textColor="?attr/colorOnSurfaceVariant" />
+                android:fontFamily="@font/lexend"
+                android:text="3 sets × 10 reps"
+                android:textColor="@color/text_gray_600"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/exercise_muscles"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Chest, Triceps, Shoulders"
-                android:textSize="12sp"
-                android:textColor="?attr/colorPrimary"
-                android:textStyle="italic" />
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/lexend_medium"
+                android:text="Target: Chest, Triceps"
+                android:textColor="@color/primary"
+                android:textSize="12sp" />
 
         </LinearLayout>
+
+        <!-- Arrow Icon -->
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_arrow_chevron_right"
+            android:contentDescription="View exercise"
+            app:tint="@color/text_gray_400" />
 
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>
-

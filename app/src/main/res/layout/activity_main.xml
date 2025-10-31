@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/deep_purple_bg"
+    android:background="@color/background_light"
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,215 +12,313 @@
         android:layout_height="wrap_content"
         tools:context=".MainActivity">
 
-        <ImageView
-            android:id="@+id/imageView_hero"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/hero_card"
             android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:contentDescription="@string/hero_image_description"
-            android:scaleType="centerCrop"
-            android:src="@drawable/workout_hero"
+            android:layout_height="320dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <View
-            android:id="@+id/image_overlay"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="#80000000"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView_hero"
-            app:layout_constraintEnd_toEndOf="@+id/imageView_hero"
-            app:layout_constraintStart_toStartOf="@+id/imageView_hero"
-            app:layout_constraintTop_toTopOf="@+id/imageView_hero" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:fontFamily="@font/poppins_bold"
-            android:text="Your Personal AI Fitness Coach"
-            android:textColor="@android:color/white"
-            android:textSize="32sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView_hero" />
+                <ImageView
+                    android:id="@+id/imageView_hero"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:contentDescription="@string/hero_image_description"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/workout_hero"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/image_overlay"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/gradient_overlay_dark"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <TextView
+                    android:id="@+id/textView_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:fontFamily="@font/lexend_bold"
+                    android:text="Your Personal AI Fitness Coach"
+                    android:textColor="@android:color/white"
+                    android:textSize="32sp"
+                    android:lineSpacingMultiplier="1.2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/textView_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="24dp"
-            android:fontFamily="@font/alata"
+            android:fontFamily="@font/lexend"
+            android:gravity="center"
             android:text="Get personalized workout plans tailored to you by our advanced AI."
-            android:textColor="@color/text_light_grey"
+            android:textColor="@color/text_gray_600"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_title" />
+            app:layout_constraintTop_toBottomOf="@+id/hero_card" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_features"
+        <HorizontalScrollView
+            android:id="@+id/scroll_features"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="24dp"
+            android:scrollbars="none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_description">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_personalized_plans"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:id="@+id/layout_features"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                app:cardBackgroundColor="@color/card_background_dark"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/card_track_progress"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:orientation="horizontal"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="160dp"
                     android:layout_height="wrap_content"
-                    android:padding="16dp">
+                    android:layout_marginEnd="24dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/icon_bot"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:contentDescription="@string/icon_bot_description"
-                        android:src="@drawable/ic_bot"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:tint="@color/accent_cyan" />
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        app:cardBackgroundColor="#1A06f906"
+                        app:cardCornerRadius="32dp"
+                        app:cardElevation="0dp">
+
+                        <ImageView
+                            android:id="@+id/icon_bot"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="@string/icon_bot_description"
+                            android:src="@drawable/ic_bot"
+                            app:tint="@color/primary" />
+
+                    </androidx.cardview.widget.CardView>
 
                     <TextView
                         android:id="@+id/text_personalized_title"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/lexend_medium"
+                        android:gravity="center"
                         android:text="Personalized Plans"
-                        android:textColor="@android:color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/icon_bot" />
+                        android:textColor="@color/text_gray_800"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/text_personalized_desc"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+                        android:fontFamily="@font/lexend"
+                        android:gravity="center"
                         android:text="AI-driven workouts that adapt to your progress."
-                        android:textColor="@color/text_light_grey"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/text_personalized_title" />
+                        android:textColor="@color/text_gray_600"
+                        android:textSize="14sp" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_track_progress"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                app:cardBackgroundColor="@color/card_background_dark"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/card_personalized_plans"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="160dp"
                     android:layout_height="wrap_content"
-                    android:padding="16dp">
+                    android:layout_marginEnd="24dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/icon_chart"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:contentDescription="@string/icon_chart_description"
-                        android:src="@drawable/ic_chart"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:tint="@color/accent_cyan" />
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        app:cardBackgroundColor="#1A06f906"
+                        app:cardCornerRadius="32dp"
+                        app:cardElevation="0dp">
+
+                        <ImageView
+                            android:id="@+id/icon_chart"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="@string/icon_chart_description"
+                            android:src="@drawable/ic_chart"
+                            app:tint="@color/primary" />
+
+                    </androidx.cardview.widget.CardView>
 
                     <TextView
                         android:id="@+id/text_track_title"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/lexend_medium"
+                        android:gravity="center"
                         android:text="Track Your Progress"
-                        android:textColor="@android:color/white"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/icon_chart" />
+                        android:textColor="@color/text_gray_800"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/text_track_desc"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
+                        android:fontFamily="@font/lexend"
+                        android:gravity="center"
                         android:text="Monitor your achievements and stay motivated."
-                        android:textColor="@color/text_light_grey"
-                        android:textSize="14sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/text_track_title" />
+                        android:textColor="@color/text_gray_600"
+                        android:textSize="14sp" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
-        <Button
-            android:id="@+id/button_get_started"
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        app:cardBackgroundColor="#1A06f906"
+                        app:cardCornerRadius="32dp"
+                        app:cardElevation="0dp">
+
+                        <ImageView
+                            android:id="@+id/icon_dumbbell"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="Expert Guidance"
+                            android:src="@drawable/ic_gym_equipment"
+                            app:tint="@color/primary" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:fontFamily="@font/lexend_medium"
+                        android:gravity="center"
+                        android:text="Expert Guidance"
+                        android:textColor="@color/text_gray_800"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/lexend"
+                        android:gravity="center"
+                        android:text="Access a library of exercises with expert tips."
+                        android:textColor="@color/text_gray_600"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+        <Space
+            android:id="@+id/spacer"
             android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/button_gradient_purple"
-            android:elevation="4dp"
-            android:text="Get Started"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/button_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_features"
-            tools:targetApi="lollipop" />
+            app:layout_constraintTop_toBottomOf="@+id/scroll_features" />
 
-        <TextView
-            android:id="@+id/textView_login_link"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/button_container"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
-
-            android:text="Already have an account? Log In"
-            android:textColor="@color/link_purple"
-            android:textSize="16sp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="32dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_get_started" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <Button
+                android:id="@+id/button_get_started"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:autoText="false"
+                android:background="@drawable/button_primary_glow"
+                android:fontFamily="@font/lexend_bold"
+                android:text="Get Started"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                tools:targetApi="lollipop" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lexend"
+                    android:text="Already have an account? "
+                    android:textColor="@color/text_gray_600"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/textView_login_link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lexend_medium"
+                    android:text="Log In"
+                    android:textColor="@color/primary"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

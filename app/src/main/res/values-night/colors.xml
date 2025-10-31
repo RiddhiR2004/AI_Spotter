@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Override background colors for dark theme -->
+    <color name="background_light">#101c22</color>
+    <color name="card_background_light">#1A1D1E</color>
+    
+    <!-- Adaptive text colors for dark theme -->
+    <color name="text_gray_900">#ffffff</color>
+    <color name="text_gray_800">#f3f4f6</color>
+    <color name="text_gray_700">#e5e7eb</color>
+    <color name="text_gray_600">#9ca3af</color>
+    <color name="text_gray_500">#6b7280</color>
+    <color name="text_gray_400">#9ca3af</color>
+    <color name="text_gray_300">#d1d5db</color>
+    
+    <!-- Adaptive backgrounds for dark theme -->
+    <color name="gray_50">#1A1D1E</color>
+    <color name="gray_100">#242729</color>
+    <color name="gray_200">#2e3537</color>
+    <color name="gray_700">#2e3537</color>
+    <color name="gray_800">#1A1D1E</color>
+    
+    <!-- Primary color adjustments for dark theme -->
+    <color name="primary">#32CD32</color>
+    <color name="primary_text">#4ade80</color>
+    
+    <!-- Chip colors for dark theme -->
+    <color name="chip_text_color">#e5e7eb</color>
+    <color name="chip_background_color">#2d2d2d</color>
+</resources>

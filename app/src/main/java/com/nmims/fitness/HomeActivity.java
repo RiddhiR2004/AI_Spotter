@@ -35,8 +35,10 @@ public class HomeActivity extends AppCompatActivity {
     private static final String TAG = "HomeActivity";
     
     private TextView welcomeTextView;
-    private TextView todayWorkoutTextView;
-    private TextView progressTextView;
+    private TextView workoutTitleTextView;
+    private TextView exerciseCountTextView;
+    private TextView progressOverallTextView;
+    private TextView progressDetailsTextView;
     private Button startWorkoutButton;
     private Button viewProgressButton;
     private Button viewFullPlanButton;
@@ -62,15 +64,17 @@ public class HomeActivity extends AppCompatActivity {
 
     private void initViews() {
         welcomeTextView = findViewById(R.id.textView_welcome);
-        todayWorkoutTextView = findViewById(R.id.textView_today_workout);
-        progressTextView = findViewById(R.id.textView_progress);
+        workoutTitleTextView = findViewById(R.id.textView_workout_title);
+        exerciseCountTextView = findViewById(R.id.textView_exercise_count);
+        progressOverallTextView = findViewById(R.id.textView_progress_overall);
+        progressDetailsTextView = findViewById(R.id.textView_progress_details);
         startWorkoutButton = findViewById(R.id.button_start_workout);
         viewProgressButton = findViewById(R.id.button_view_progress);
         viewFullPlanButton = findViewById(R.id.button_view_full_plan);
         aiCoachButton = findViewById(R.id.button_ai_coach);
         
-        // Settings icon
-        findViewById(R.id.icon_settings).setOnClickListener(v -> {
+        // Profile icon
+        findViewById(R.id.icon_profile).setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
             startActivity(intent);
         });
@@ -204,29 +208,17 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         if (todayWorkout != null) {
-            StringBuilder workoutInfo = new StringBuilder();
-            workoutInfo.append("🎯 ").append(todayWorkout.getFocus()).append("\n\n");
-            workoutInfo.append("📋 ").append(todayWorkout.getExercises().size())
-                      .append(" exercises\n\n");
+            // Set workout title
+            workoutTitleTextView.setText(todayWorkout.getFocus());
             
-            // Show first 3 exercises
-            int count = Math.min(3, todayWorkout.getExercises().size());
-            for (int i = 0; i < count; i++) {
-                workoutInfo.append("• ").append(todayWorkout.getExercises().get(i).getName())
-                          .append("\n");
-            }
+            // Set exercise count
+            exerciseCountTextView.setText(todayWorkout.getExercises().size() + " exercises");
             
-            if (todayWorkout.getExercises().size() > 3) {
-                workoutInfo.append("• and ")
-                          .append(todayWorkout.getExercises().size() - 3)
-                          .append(" more...");
-            }
-            
-            todayWorkoutTextView.setText(workoutInfo.toString());
             startWorkoutButton.setEnabled(true);
             startWorkoutButton.setText("Start Today's Workout");
         } else {
-            todayWorkoutTextView.setText("🎉 Rest day! Your body needs recovery.");
+            workoutTitleTextView.setText("Rest Day");
+            exerciseCountTextView.setText("Your body needs recovery");
             startWorkoutButton.setText("View Full Plan");
             startWorkoutButton.setEnabled(true);
         }
@@ -254,16 +246,15 @@ public class HomeActivity extends AppCompatActivity {
             ? (float) completedExercises / totalExercises * 100 
             : 0;
 
-        String progressText = String.format(Locale.getDefault(),
-                "📊 Overall Progress: %.0f%%\n%d / %d exercises completed",
-                progressPercentage, completedExercises, totalExercises);
-
-        progressTextView.setText(progressText);
+        progressOverallTextView.setText(String.format(Locale.getDefault(),
+                "Progress %.0f%%", progressPercentage));
+        progressDetailsTextView.setText(String.format(Locale.getDefault(),
+                "%d / %d exercises done", completedExercises, totalExercises));
     }
 
     private void showNoWorkoutMessage() {
-        todayWorkoutTextView.setText("No workout plan found.\n\n" +
-                "Create a personalized plan by completing your profile.");
+        workoutTitleTextView.setText("No Workout Plan");
+        exerciseCountTextView.setText("Create a personalized plan by completing your profile");
         startWorkoutButton.setText("Create Workout Plan");
         startWorkoutButton.setEnabled(true);
         

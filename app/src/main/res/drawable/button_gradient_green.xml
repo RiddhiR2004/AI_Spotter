@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Outer glow - largest spread -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="34dp" />
+            <solid android:color="#4006f906" />
+        </shape>
+    </item>
+    <!-- Middle glow layer -->
+    <item
+        android:bottom="3dp"
+        android:left="3dp"
+        android:right="3dp"
+        android:top="3dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="32dp" />
+            <solid android:color="#6006f906" />
+        </shape>
+    </item>
+    <!-- Inner glow layer - brightest -->
+    <item
+        android:bottom="6dp"
+        android:left="6dp"
+        android:right="6dp"
+        android:top="6dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="30dp" />
+            <solid android:color="#8006f906" />
+        </shape>
+    </item>
+    <!-- Main button with gradient -->
+    <item
+        android:bottom="8dp"
+        android:left="8dp"
+        android:right="8dp"
+        android:top="8dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="30dp" />
+            <gradient
+                android:angle="135"
+                android:endColor="#39FF14"
+                android:startColor="#06f906"
+                android:type="linear" />
+        </shape>
+    </item>
+</layer-list>

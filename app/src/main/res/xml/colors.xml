@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="deep_purple_bg">#1A0033</color> <color name="card_background_dark">#2B004D</color> <color name="text_light_grey">#B0B0B0</color>
-    <color name="link_purple">#A07EFD</color> <color name="accent_cyan">#00BCD4</color> <color name="button_gradient_start">#A07EFD</color> <color name="button_gradient_end">#EC407A</color> </resources>
+    <color name="primary">#06f906</color>
+    <color name="primary_variant">#39FF14</color>
+    <color name="background_light">#f5f8f5</color>
+    <color name="background_dark">#0f230f</color>
+    <color name="card_background_dark">#1a1a1a</color>
+    <color name="text_light_grey">#a0a0a0</color>
+</resources>

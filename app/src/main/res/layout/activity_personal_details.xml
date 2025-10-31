@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/deep_purple_bg"
+    android:background="@color/background_light"
     android:fillViewport="true"
     tools:context=".PersonalDetailsActivity">
 
@@ -13,38 +13,49 @@
         android:layout_height="wrap_content"
         android:padding="24dp">
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="0dp"
-            android:layout_height="8dp"
-            android:progress="25"
-            android:progressDrawable="@drawable/custom_progress_bar"
-            app:layout_constraintBottom_toBottomOf="@+id/textView_progressLabel"
-            app:layout_constraintEnd_toStartOf="@+id/textView_progressLabel"
+        <TextView
+            android:id="@+id/textView_step"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lexend_medium"
+            android:text="Step 1 of 4"
+            android:textColor="@color/text_gray_600"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView_progressLabel"
-            app:layout_constraintWidth_percent="0.6" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView_progressLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/lexend_semibold"
             android:text="Personal Details"
-            android:textColor="@android:color/white"
+            android:textColor="@color/primary"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:layout_marginTop="8dp"
+            android:progress="25"
+            android:progressDrawable="@drawable/custom_progress_bar_green"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView_step" />
 
         <TextView
             android:id="@+id/textView_mainHeading"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:fontFamily="@font/poppins_bold"
+            android:fontFamily="@font/lexend_bold"
+            android:gravity="center"
             android:text="Let's get to know you."
-            android:textColor="@android:color/white"
+            android:textColor="@color/text_gray_900"
             android:textSize="32sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,9 +66,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/lexend_medium"
             android:text="Name"
-            android:textColor="@color/text_light_grey"
+            android:textColor="@color/text_gray_700"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView_mainHeading" />
@@ -65,16 +76,16 @@
         <EditText
             android:id="@+id/editText_name"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="56dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/edit_text_background"
-            android:fontFamily="@font/poppins"
+            android:background="@drawable/edit_text_background_light"
+            android:fontFamily="@font/lexend"
             android:hint="Enter your name"
             android:inputType="textPersonName"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:textColor="@android:color/white"
-            android:textColorHint="@color/text_light_grey"
+            android:textColor="@color/text_gray_900"
+            android:textColorHint="@color/gray_400"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -85,9 +96,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/lexend_medium"
             android:text="Email"
-            android:textColor="@color/text_light_grey"
+            android:textColor="@color/text_gray_700"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editText_name" />
@@ -95,16 +106,16 @@
         <EditText
             android:id="@+id/editText_email"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="56dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/edit_text_background"
-            android:fontFamily="@font/poppins"
+            android:background="@drawable/edit_text_background_light"
+            android:fontFamily="@font/lexend"
             android:hint="Enter your email"
             android:inputType="textEmailAddress"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:textColor="@android:color/white"
-            android:textColorHint="@color/text_light_grey"
+            android:textColor="@color/text_gray_900"
+            android:textColorHint="@color/gray_400"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -125,29 +136,30 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="12dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/lexend_medium"
                     android:text="Age"
-                    android:textColor="@color/text_light_grey"
+                    android:textColor="@color/text_gray_700"
                     android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/editText_age"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="56dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/edit_text_background"
-                    android:fontFamily="@font/poppins"
+                    android:background="@drawable/edit_text_background_light"
+                    android:fontFamily="@font/lexend"
+                    android:hint="25"
                     android:inputType="number"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
-                    android:text="25"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/text_gray_900"
+                    android:textColorHint="@color/gray_400"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -155,30 +167,31 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/lexend_medium"
                     android:text="Height (cm)"
-                    android:textColor="@color/text_light_grey"
+                    android:textColor="@color/text_gray_700"
                     android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/editText_height"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="56dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/edit_text_background"
-                    android:fontFamily="@font/poppins"
+                    android:background="@drawable/edit_text_background_light"
+                    android:fontFamily="@font/lexend"
+                    android:hint="175"
                     android:inputType="number"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
-                    android:text="175"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/text_gray_900"
+                    android:textColorHint="@color/gray_400"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -186,59 +199,60 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="12dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/lexend_medium"
                     android:text="Weight (kg)"
-                    android:textColor="@color/text_light_grey"
+                    android:textColor="@color/text_gray_700"
                     android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/editText_weight"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="56dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/edit_text_background"
-                    android:fontFamily="@font/poppins"
+                    android:background="@drawable/edit_text_background_light"
+                    android:fontFamily="@font/lexend"
+                    android:hint="70"
                     android:inputType="numberDecimal"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
-                    android:text="70"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/text_gray_900"
+                    android:textColorHint="@color/gray_400"
                     android:textSize="16sp" />
             </LinearLayout>
 
         </LinearLayout>
 
-        <!-- Current Fitness Level Section -->
+        <!-- Fitness Assessment Section -->
         <TextView
-            android:id="@+id/textView_fitnessLabel"
+            android:id="@+id/textView_fitnessAssessment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:fontFamily="@font/poppins_bold"
-            android:text="Current Fitness Level (Optional)"
-            android:textColor="@android:color/white"
+            android:fontFamily="@font/lexend_semibold"
+            android:text="Fitness Assessment"
+            android:textColor="@color/text_gray_900"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout_stats" />
 
         <TextView
-            android:id="@+id/textView_fitnessSubLabel"
+            android:id="@+id/textView_fitnessDesc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:fontFamily="@font/poppins"
-            android:text="Help us understand your starting point"
-            android:textColor="@color/text_light_grey"
+            android:fontFamily="@font/lexend"
+            android:text="How many can you do in one set? (Enter 0 if you can't do any)"
+            android:textColor="@color/text_gray_600"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_fitnessLabel" />
+            app:layout_constraintTop_toBottomOf="@+id/textView_fitnessAssessment" />
 
         <LinearLayout
             android:id="@+id/linearLayout_fitness"
@@ -249,99 +263,99 @@
             android:weightSum="3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_fitnessSubLabel">
+            app:layout_constraintTop_toBottomOf="@+id/textView_fitnessDesc">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="12dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:text="Pull-ups"
-                    android:textColor="@color/text_light_grey"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/editText_pullups"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/edit_text_background"
-                    android:fontFamily="@font/poppins"
-                    android:hint="0"
-                    android:inputType="number"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@color/text_light_grey"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:text="Dips"
-                    android:textColor="@color/text_light_grey"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/editText_dips"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/edit_text_background"
-                    android:fontFamily="@font/poppins"
-                    android:hint="0"
-                    android:inputType="number"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@color/text_light_grey"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="8dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/lexend_medium"
                     android:text="Push-ups"
-                    android:textColor="@color/text_light_grey"
-                    android:textSize="14sp" />
+                    android:textColor="@color/text_gray_700"
+                    android:textSize="16sp" />
 
                 <EditText
                     android:id="@+id/editText_pushups"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="56dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/edit_text_background"
-                    android:fontFamily="@font/poppins"
+                    android:background="@drawable/edit_text_background_light"
+                    android:fontFamily="@font/lexend"
                     android:hint="0"
                     android:inputType="number"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@color/text_light_grey"
+                    android:textColor="@color/text_gray_900"
+                    android:textColorHint="@color/gray_400"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lexend_medium"
+                    android:text="Pull-ups"
+                    android:textColor="@color/text_gray_700"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/editText_pullups"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/edit_text_background_light"
+                    android:fontFamily="@font/lexend"
+                    android:hint="0"
+                    android:inputType="number"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:textColor="@color/text_gray_900"
+                    android:textColorHint="@color/gray_400"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="12dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lexend_medium"
+                    android:text="Dips"
+                    android:textColor="@color/text_gray_700"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/editText_dips"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/edit_text_background_light"
+                    android:fontFamily="@font/lexend"
+                    android:hint="0"
+                    android:inputType="number"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:textColor="@color/text_gray_900"
+                    android:textColorHint="@color/gray_400"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -350,15 +364,16 @@
         <Button
             android:id="@+id/button_next"
             android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/button_background_purple"
+            android:layout_height="56dp"
+            android:layout_marginTop="48dp"
+            android:background="@drawable/button_next_green"
             android:drawableEnd="@drawable/ic_arrow_forward"
-            android:fontFamily="@font/poppins_bold"
+            android:fontFamily="@font/lexend_bold"
+            android:gravity="center"
             android:paddingEnd="24dp"
             android:text="Next"
             android:textAllCaps="false"
-            android:textColor="@android:color/white"
+            android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
