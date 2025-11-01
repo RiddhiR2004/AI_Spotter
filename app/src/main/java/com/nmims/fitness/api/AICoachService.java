@@ -41,7 +41,7 @@ public class AICoachService {
     private final SupabaseClient supabaseClient;
     private final SharedPreferences chatPrefs;
     
-    // Increased timeouts for large context processing
+    // Large timeouts for large context processing
     private static final int CONNECT_TIMEOUT = 30; // seconds
     private static final int READ_TIMEOUT = 90; // seconds - Gemini needs time to process large context
     private static final int WRITE_TIMEOUT = 30; // seconds
@@ -523,4 +523,3 @@ public class AICoachService {
         void onError(String error);
     }
 }
-
